@@ -1,0 +1,181 @@
+managed implementation in class zbp_r_salesordertp unique;
+strict ( 2 );
+with draft;
+//extensible { with additional save; with determinations on modify; with determinations on save; with validations on save; }
+
+// Allow consumers to use PRIVILEGED mode
+//cl_abap_behv_aux=>get_current_context(    IMPORTING privileged = data(privileged)  ).
+
+//with privileged mode disabling NoCheckWhenPrivileged;
+
+
+//define own authorization context by privileged mode and { }
+
+//define authorization context NoCheckWhenPrivileged { 'Z_VBAK_VK'; }
+
+//define authorization context NoCheckWhenReadingOrModifying
+//for disable ( modify, read ) ##WARN_OK { }
+
+define behavior for ZR_SalesOrderTP alias SalesOrder
+persistent table zsalesorder
+draft table zsalesorderd
+with additional save
+lock master unmanaged total etag LastChangeDateTime
+etag master LastChangeDateTime
+authorization master ( global, instance )
+//changedocuments master ( zsalesorder )
+
+{
+  create ( features : global );
+  update ( features : instance, precheck );
+  delete;
+  association _Item { create ( features : instance ); with draft; }
+  field ( mandatory : create, readonly : update ) SalesOrder;
+  field ( readonly ) CreatedByUser;
+  field ( readonly ) CreationDateTime;
+  field ( readonly ) LastChangedByUser;
+  field ( readonly ) LastChangeDateTime;
+  field ( readonly ) DeliveryIsCompleted;
+  field ( mandatory ) SalesOrderType;
+  field ( mandatory ) SalesOrganization;
+  field ( mandatory ) SoldToParty;
+
+  action ( features : instance ) Delete;
+//  draft action Activate optimized;
+  draft action Activate ;
+  draft action ( features : instance ) Edit;
+  draft action Resume;
+  draft action Discard;
+  draft determine action Prepare;
+
+  static factory action ( features : global ) CreateFromQuote deep parameter ZD_SalesOrderCreateFromQuoteP [1];
+
+  function GetNumberOfItems deep result [1] ZD_SalesOrderGetNumberofItemsR;
+  function GetSalesOrder deep result [1] ZD_SalesOrderGetResult;
+
+  determination CalculateTotalNetAmount on modify { field NetAmount, TransactionCurrency; }
+  validation VerifySoldToParty on save { field SoldToParty; }
+  determine action Check
+  {
+    validation ( always ) VerifySoldToParty;
+    validation ( always ) SalesOrderItem~VerifyProduct;
+    validation ( always ) SalesOrderScheduleLine~VerifyQuantityUnit;
+  }
+  /*
+  side effects
+  {
+    action Delete
+    affects $self,
+        entity _Item,
+        entity _item._ScheduleLine,
+        permissions ( action Delete ),
+        messages;
+    // determine actin Prepare executed on global
+    // error "execute on global" is not supported in this ABAP release.
+    // workaround: use action Prepare in on fields
+    determine action Prepare executed on
+    field SoldToParty,
+    field NetAmount,
+    field TransactionCurrency,
+    field _Item.OrderQuantity,
+    field _Item.OrderQuantityUnit,
+    field _Item.Product,
+    field _Item.NetAmount,
+    field _Item.TransactionCurrency,
+    field _Item._ScheduleLine.OrderQuantity,
+    field _Item._ScheduleLine.OrderQuantityUnit
+    affects
+        field SoldToParty,
+        field NetAmount,
+        field TransactionCurrency,
+        field _Item.OrderQuantity,
+        field _Item.OrderQuantityUnit,
+        field _Item.Product,
+        field _Item.NetAmount,
+        field _Item.TransactionCurrency,
+        field _Item._ScheduleLine.OrderQuantity,
+        field _Item._ScheduleLine.OrderQuantityUnit,
+        messages;
+
+  }
+  */
+  event Created parameter ZD_SalesOrderCreated;
+  event Changed;
+  event Deleted;
+  //managed event CreatedWithSoldToParty on Created parameter ZD_SalesOrderCreatedDerived;
+  event CreatedWithSoldToParty parameter ZD_SalesOrderCreated;
+
+}
+
+define behavior for ZR_SalesOrderItemTP alias SalesOrderItem
+early numbering
+persistent table zsalesorderitem
+draft table zsalesorderitemd
+lock dependent by _SalesOrder
+authorization dependent by _SalesOrder
+//etag master LastChangeDateTime
+{
+
+  action delete;
+  update ( features : instance );
+  delete ( features : instance );
+  field ( readonly ) SalesOrder;
+  field ( readonly : update ) SalesOrderItem;
+  field ( readonly ) LastChangedByUser;
+  field ( readonly ) LastChangeDateTime;
+
+
+  association _SalesOrder { with draft; }
+  association _ScheduleLine { create ( features : instance ); with draft; }
+
+  //unmanaged association _RequestedScheduleLine
+  //unmanaged association _RequestedScheduleLine
+  /*
+  association _RequestedScheduleLine
+  { create ( authorization : update, features : instance ); }
+  //unmanaged association _ConfirmedScheduleLine
+  association _ConfirmedScheduleLine
+  { create ( authorization : update, features : instance ); }
+  */
+
+  action ( authorization : update, features : instance ) Copy
+    parameter ZD_SALESORDERITEMCOPYPARAMETER
+    result [1..*] $self;
+
+  determination CalculateTotalAmount on save { field Product, OrderQuantity, OrderQuantityUnit; }
+  determination CalculateNetAmount on modify { field NetAmount, TransactionCurrency; }
+  validation VerifyProduct on save { field Product; }
+  /*
+  side effects
+  {
+    action Copy
+    affects $self,
+        entity _ScheduleLine;
+    field NetAmount
+    affects
+        //field _SalesOrder.NetAmount,
+        field NetAmount;
+        //field _SalesOrder.TransactionCurrency;
+        field TransactionCurrency;
+  }
+  */
+}
+
+define behavior for ZR_SalesOrderScheduleLineTP alias SalesOrderScheduleLine
+early numbering
+persistent table zsalesordersline
+draft table zsalesorderslind
+lock dependent by _SalesOrder
+authorization dependent by _SalesOrder
+etag master LastChangeDateTime
+//changedocuments master ( zsalesorder )
+{
+  update ( features : instance );
+  delete ( features : instance );
+  field ( readonly ) SalesOrder;
+  field ( readonly : update ) SalesOrderItem;
+  field ( readonly : update ) SalesOrderScheduleLine;
+  association _SalesOrder { with draft; }
+  association _SalesOrderItem { with draft; }
+  validation VerifyQuantityUnit on save { field OrderQuantityUnit; }
+}
