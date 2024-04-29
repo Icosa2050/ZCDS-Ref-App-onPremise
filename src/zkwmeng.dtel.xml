@@ -15,9 +15,7 @@
     <SCRTEXT_S>KumAuMenge</SCRTEXT_S>
     <SCRTEXT_M>KumAuMenge</SCRTEXT_M>
     <SCRTEXT_L>Auftragsmenge</SCRTEXT_L>
-    <ACTFLAG>I</ACTFLAG>
     <DTELMASTER>E</DTELMASTER>
-    <RESERVEDTE>JB</RESERVEDTE>
     <REFKIND>D</REFKIND>
    </DD04V>
   </asx:values>

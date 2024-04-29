@@ -31,7 +31,7 @@ CLASS zcl_conversion_test IMPLEMENTATION.
 *9    100           USD    82019898  2
 *Date is inverted to 1998-08-20
         "data dat1 type d value '82019898' .
-        DATA dat1 TYPE d VALUE '20230101' .
+        DATA dat1 TYPE d VALUE '82019898' .
         DATA dat2 TYPE d .
         TRANSLATE dat1 USING '09182736455463728190'.
         out->write( dat1 ).

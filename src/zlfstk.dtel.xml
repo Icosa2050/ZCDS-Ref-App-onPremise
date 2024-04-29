@@ -15,9 +15,7 @@
     <SCRTEXT_S>status</SCRTEXT_S>
     <SCRTEXT_M>status</SCRTEXT_M>
     <SCRTEXT_L>Document status</SCRTEXT_L>
-    <ACTFLAG>I</ACTFLAG>
     <DTELMASTER>E</DTELMASTER>
-    <RESERVEDTE>JB</RESERVEDTE>
     <REFKIND>D</REFKIND>
    </DD04V>
   </asx:values>

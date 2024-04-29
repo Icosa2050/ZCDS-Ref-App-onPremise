@@ -5,9 +5,9 @@ CLASS zcl_f_salesorderitem DEFINITION
 
   PUBLIC SECTION.
 
-    INTERFACES if_sadl_exit .
+    "INTERFACES if_sadl_exit .
     INTERFACES if_sadl_exit_calc_element_read .
-    INTERFACES if_sadl_exit_filter_transform .
+    "INTERFACES if_sadl_exit_filter_transform .
     INTERFACES if_sadl_exit_sort_transform .
   PROTECTED SECTION.
   PRIVATE SECTION.
@@ -51,54 +51,7 @@ CLASS ZCL_F_SALESORDERITEM IMPLEMENTATION.
 * | [!CX!] CX_SADL_EXIT
 * +--------------------------------------------------------------------------------------</SIGNATURE>
   METHOD if_sadl_exit_calc_element_read~get_calculation_info.
-    INSERT CONV #('NETAMOUNT') INTO TABLE et_requested_orig_elements.
-  ENDMETHOD.
-
-
-* <SIGNATURE>---------------------------------------------------------------------------------------+
-* | Instance Public Method ZCL_F_SALESORDERITEM->IF_SADL_EXIT_FILTER_TRANSFORM~MAP_ATOM
-* +-------------------------------------------------------------------------------------------------+
-* | [--->] IV_ENTITY                      TYPE        STRING
-* | [--->] IV_ELEMENT                     TYPE        SADL_ENTITY_ELEMENT
-* | [--->] IV_OPERATOR                    TYPE        STRING
-* | [--->] IV_VALUE                       TYPE        STRING
-* | [<-()] RO_CONDITION                   TYPE REF TO IF_SADL_COND_PROVIDER_GENERIC
-* | [!CX!] CX_SADL_EXIT_FILTER_NOT_SUPP
-* | [!CX!] CX_SADL_EXIT
-* +--------------------------------------------------------------------------------------</SIGNATURE>
-  METHOD if_sadl_exit_filter_transform~map_atom.
-    ASSERT iv_entity = 'ZC_SALESORDERITEMTP'.
-    ASSERT iv_element = 'ORDERISFREEOFCHARGE'.
-    CASE iv_operator.
-      WHEN if_sadl_exit_filter_transform~co_operator-equals.
-        IF iv_value = abap_true.
-          DATA(isfree) = abap_true.
-        ELSE.
-          isfree = abap_false.
-        ENDIF.
-      WHEN if_sadl_exit_filter_transform~co_operator-greater_than.
-        IF iv_value = abap_true.
-          RETURN.
-        ELSE.
-          isfree = abap_true.
-        ENDIF.
-      WHEN if_sadl_exit_filter_transform~co_operator-less_than.
-        IF iv_value = abap_true.
-          isfree = abap_false.
-        ELSE.
-          RETURN.
-        ENDIF.
-      WHEN if_sadl_exit_filter_transform~co_operator-is_null.
-        ASSERT 1 = 0. "may never happen
-      WHEN if_sadl_exit_filter_transform~co_operator-covers_pattern.
-        ASSERT 1 = 0. "may never happen
-    ENDCASE.
-    DATA(condition) = cl_sadl_cond_prov_factory_pub=>create_simple_cond_factory( ).
-    IF isfree = abap_true.
-      condition->element( iv_name = 'NETAMOUNT' )->equals( iv_value = 0 ).
-    ELSE.
-      condition->element( iv_name = 'NETAMOUNT' )->greater_than( iv_value = 0 ).
-    ENDIF.
+    INSERT CONV #( 'NETAMOUNT' ) INTO TABLE et_requested_orig_elements.
   ENDMETHOD.
 
 

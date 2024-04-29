@@ -56,12 +56,8 @@ CLASS zcl_insert_zsalesorg IMPLEMENTATION.
     APPEND ls_sales_org_ic TO lt_sales_org_ic.
 
     INSERT zsalesorg FROM TABLE @lt_sales_org_ic.
-    IF sy-subrc = 0.
-      COMMIT WORK.
-      out->write( lt_sales_org_ic ).
-    ELSE.
-      out->write( 'error insert' ).
-    ENDIF.
+    out->write( 'after insert' ).
+    out->write( lt_sales_org_ic ).
 
 
 
@@ -73,7 +69,8 @@ CLASS zcl_insert_zsalesorg IMPLEMENTATION.
     LOOP AT lt_sales_org_text INTO ls_sales_org_text.
       DELETE zsalesorg FROM @ls_sales_org_text.
       IF sy-subrc <> 0.
-        out->write( 'error deleting zsalesorg' ).
+        out->write( 'error' ).
+        out->write( ls_sales_org_text ).
       ENDIF.
     ENDLOOP.
     CLEAR ls_sales_org_text.
@@ -81,7 +78,6 @@ CLASS zcl_insert_zsalesorg IMPLEMENTATION.
 
     ls_sales_org_text = VALUE  #(
     salesorganization = 'CENT'
-    language = 'E'
     vtext = 'Central Sales Organization'
      ).
 
@@ -89,7 +85,6 @@ CLASS zcl_insert_zsalesorg IMPLEMENTATION.
 
     ls_sales_org_text = VALUE  #(
         salesorganization = 'FILA'
-        language = 'E'
         vtext = 'Sales Organization A'
          ).
 
@@ -97,7 +92,6 @@ CLASS zcl_insert_zsalesorg IMPLEMENTATION.
 
     ls_sales_org_text = VALUE  #(
         salesorganization = 'FILB'
-        language = 'E'
         vtext = 'Sales Organization B'
          ).
 
@@ -105,19 +99,14 @@ CLASS zcl_insert_zsalesorg IMPLEMENTATION.
 
     ls_sales_org_text = VALUE  #(
         salesorganization = 'FILC'
-        language = 'E'
         vtext = 'Sales Organization C'
          ).
 
     APPEND ls_sales_org_text TO lt_sales_org_text.
 
-    INSERT zsalesorgtext FROM TABLE @lt_sales_org_text.
-    IF sy-subrc <> 0.
-      out->write( 'error insert zsalesorgtext' ).
-    ELSE.
-      COMMIT WORK.
-      out->write( lt_sales_org_text ).
-    ENDIF.
+    INSERT zsalesorg FROM TABLE @lt_sales_org_text.
+    out->write( 'after insert' ).
+    out->write( lt_sales_org_text ).
 
 
 

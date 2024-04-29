@@ -164,9 +164,8 @@ CLASS zcl_select_chap02 IMPLEMENTATION.
 
     SELECT *
        FROM zc_salesorderprivilegedonly
-       INTO TABLE @DATA(lt_zc_salesorderprivilegdonly3).
-       "PRIVILEGED ACCESS GRAMMAR ERROR
-       "PRIVILEGED ACCESS.
+       with privileged access
+       INTO TABLE @DATA(lt_zc_salesorderprivilegdonly3) .
 
 *SELECT zc_slsordprivilegedonlysource~salesorder,
 *       \_salesorderprivilegedonly-salesorder AS salesorder2,

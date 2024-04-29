@@ -15,9 +15,7 @@
     <SCRTEXT_S>Währung</SCRTEXT_S>
     <SCRTEXT_M>Währung</SCRTEXT_M>
     <SCRTEXT_L>Währung</SCRTEXT_L>
-    <ACTFLAG>I</ACTFLAG>
     <DTELMASTER>E</DTELMASTER>
-    <RESERVEDTE>JB</RESERVEDTE>
     <REFKIND>D</REFKIND>
    </DD04V>
   </asx:values>

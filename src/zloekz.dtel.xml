@@ -15,9 +15,7 @@
     <SCRTEXT_S>Del. ind.</SCRTEXT_S>
     <SCRTEXT_M>Deletion Indic.</SCRTEXT_M>
     <SCRTEXT_L>Deletion indicator</SCRTEXT_L>
-    <ACTFLAG>I</ACTFLAG>
     <DTELMASTER>E</DTELMASTER>
-    <RESERVEDTE>JB</RESERVEDTE>
     <REFKIND>D</REFKIND>
    </DD04V>
   </asx:values>
