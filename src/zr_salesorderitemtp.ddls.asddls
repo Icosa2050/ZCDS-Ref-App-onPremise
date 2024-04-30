@@ -1,5 +1,5 @@
 @AbapCatalog.viewEnhancementCategory: [#NONE]
-@AccessControl.authorizationCheck: #NOT_REQUIRED
+@AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Sales Order Item'
 @Metadata.ignorePropagatedAnnotations: true
 @ObjectModel.usageType:{
@@ -32,6 +32,8 @@ define view entity ZR_SalesOrderItemTP
       @Semantics.amount.currencyCode: 'TransactionCurrency'
       ZR_SalesOrderItem.NetAmount,
       ZR_SalesOrderItem.TransactionCurrency,
+      @Semantics.businessDate.at: true
+      ZR_SalesOrderItem.CreationDate,
       @Semantics.user.createdBy: true
       ZR_SalesOrderItem.CreatedByUser,
       @Semantics.systemDateTime.createdAt: true

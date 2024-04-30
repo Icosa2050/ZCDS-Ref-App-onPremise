@@ -17,6 +17,7 @@ CLASS zcl_insert_zproduct_ic IMPLEMENTATION.
     DATA: ls_product_ic TYPE zproduct_ic.
     SELECT * FROM zproduct_ic INTO TABLE @lt_product_ic.
     delete zproduct_ic from table @lt_product_ic.
+    commit work.
    GET TIME STAMP FIELD DATA(lv_time).
     CLEAR ls_product_ic.
     CLEAR lt_product_ic.
@@ -70,6 +71,7 @@ CLASS zcl_insert_zproduct_ic IMPLEMENTATION.
 
 
     INSERT zproduct_ic FROM TABLE @lt_product_ic.
+    commit work.
     out->write( 'after insert' ).
     out->write( lt_product_ic ).
 

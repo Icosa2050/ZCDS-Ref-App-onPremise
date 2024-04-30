@@ -5,25 +5,31 @@
    <T100A>
     <ARBGB>Z_SALESORDER</ARBGB>
     <MASTERLANG>E</MASTERLANG>
-    <STEXT>sales order messages</STEXT>
+    <STEXT>messages</STEXT>
    </T100A>
    <T100>
     <T100>
      <SPRSL>E</SPRSL>
      <ARBGB>Z_SALESORDER</ARBGB>
      <MSGNR>000</MSGNR>
-     <TEXT>Error in Sales Order Processing</TEXT>
+     <TEXT>&amp;1 %2 %3 %4</TEXT>
     </T100>
     <T100>
      <SPRSL>E</SPRSL>
      <ARBGB>Z_SALESORDER</ARBGB>
      <MSGNR>001</MSGNR>
-     <TEXT>Sales Order &amp;1 locked by &amp;2</TEXT>
+     <TEXT>Error in Sales Order Processing</TEXT>
     </T100>
     <T100>
      <SPRSL>E</SPRSL>
      <ARBGB>Z_SALESORDER</ARBGB>
      <MSGNR>002</MSGNR>
+     <TEXT>Sales Order &amp;1 locked by &amp;2</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_SALESORDER</ARBGB>
+     <MSGNR>003</MSGNR>
      <TEXT>Product is initial</TEXT>
     </T100>
     <T100>
@@ -79,6 +85,11 @@
      <ARBGB>Z_SALESORDER</ARBGB>
      <MSGNR>012</MSGNR>
      <TEXT>Not implemented (for demo purpose only)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>Z_SALESORDER</ARBGB>
+     <MSGNR>013</MSGNR>
     </T100>
    </T100>
   </asx:values>

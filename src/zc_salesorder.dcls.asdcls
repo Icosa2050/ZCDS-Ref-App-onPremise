@@ -23,13 +23,13 @@ inherit ZI_SalesOrder;
 
 //variant 4
 // garanties to run even if the inheriting entity is not available
-/*
 grant select on ZC_SalesOrder 
 where inheriting conditions from entity ZI_SalesOrder 
     default true 
     replacing { root with _SalesOrder };
-    */
+}
 //variant 5 Listing 5.34
+/*
 grant select on ZC_SalesOrder  
 where inheriting conditions from entity ZI_SalesOrder    
         replacing { 
@@ -38,3 +38,4 @@ where inheriting conditions from entity ZI_SalesOrder
                                DistributionChannel )
         with void };
 }
+*/

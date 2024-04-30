@@ -14,6 +14,11 @@ define role ZC_SALESORDERVH {
                     //results in 
                     */
                     
+                    grant select on ZC_SalesOrderVH    
+                    where inheriting conditions from entity ZI_SalesOrder 
+                    default true ;
+}
+/*
                    grant select on ZC_SalesOrderVH    
                    where ( SalesOrderType ) =    
                    aspect pfcg_auth ( ZTEST,
@@ -29,3 +34,4 @@ define role ZC_SALESORDERVH {
                         
                         
 }
+*/

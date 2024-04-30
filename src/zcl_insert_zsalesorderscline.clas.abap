@@ -21,6 +21,7 @@ CLASS zcl_insert_zsalesorderscline IMPLEMENTATION.
 
     TRY.
         insert_salesorderscline( out = out ).
+         commit work.
       CATCH zcx_db_message INTO DATA(lo_error).
         out->write( lo_error->get_text( ) ).
     ENDTRY.

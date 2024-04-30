@@ -4,7 +4,7 @@
 
 @Metadata.ignorePropagatedAnnotations: true
 
-@ObjectModel.representativeKey: 'SalesOrg'
+@ObjectModel.representativeKey: 'SalesOrganization'
 
 @ObjectModel.dataCategory: #TEXT
 
@@ -16,7 +16,7 @@ define view entity ZI_SALESORGTEXT
 
   association to parent ZI_SalesOrganization as _SalesOrg
 
-    on $projection.SalesOrg = _SalesOrg.Salesorganization
+    on $projection.SalesOrganization = _SalesOrg.Salesorganization
 
 
 {
@@ -27,7 +27,7 @@ define view entity ZI_SALESORGTEXT
 
       @ObjectModel.text.element:['SalesOrgName']
 
-  key salesorganization as SalesOrg,
+  key salesorganization as SalesOrganization,
 
       @Search.defaultSearchElement: true
 

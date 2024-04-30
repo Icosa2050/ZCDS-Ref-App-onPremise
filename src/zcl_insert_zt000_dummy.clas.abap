@@ -31,6 +31,7 @@ CLASS zcl_insert_zt000_dummy IMPLEMENTATION.
     APPEND ls_test TO lt_test.
 
     INSERT zt000_dummy FROM TABLE @lt_test.
+    commit work.
 
   ENDMETHOD.
 ENDCLASS.

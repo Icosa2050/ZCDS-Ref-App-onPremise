@@ -4,29 +4,29 @@
   <asx:values>
    <SRVB>
     <METADATA>
-     <NAME>ZUI_SALESORDERMANAGE</NAME>
+     <NAME>ZUI_CSALESORDERTP</NAME>
      <TYPE>SRVB/SVB</TYPE>
-     <DESCRIPTION>new version</DESCRIPTION>
+     <DESCRIPTION>projection</DESCRIPTION>
      <RESPONSIBLE>DEVELOPER</RESPONSIBLE>
      <MASTER_LANGUAGE>EN</MASTER_LANGUAGE>
     </METADATA>
     <CONTENT>
      <BIND_TYPE_IMPL>
-      <NAME>ZUI_SALESORDERMANAGE</NAME>
+      <NAME>ZUI_CSALESORDERTP</NAME>
      </BIND_TYPE_IMPL>
      <BIND_TYPE>ODATA</BIND_TYPE>
      <BIND_TYPE_VERSION>V4</BIND_TYPE_VERSION>
      <SERVICES>
       <item>
-       <SERVICE_NAME>ZUI_SALESORDERMANAGE</SERVICE_NAME>
+       <SERVICE_NAME>ZUI_CSALESORDERTP</SERVICE_NAME>
        <SERVICE_CONTENT>
         <item>
          <SERVICE_VERSION>0001</SERVICE_VERSION>
          <RELEASE_STATE>NOT_RELEASED</RELEASE_STATE>
          <SRVD_REF>
-          <URI>/sap/bc/adt/ddic/srvd/sources/zui_salesordermanage</URI>
+          <URI>/sap/bc/adt/ddic/srvd/sources/zui_csalesordertp</URI>
           <TYPE>SRVD/SRV</TYPE>
-          <NAME>ZUI_SALESORDERMANAGE</NAME>
+          <NAME>ZUI_CSALESORDERTP</NAME>
          </SRVD_REF>
          <BIND_TYPE_DATA>
           <CONTENT>

@@ -115,5 +115,6 @@ CLASS zcl_insert_zsalesorg IMPLEMENTATION.
   METHOD if_oo_adt_classrun~main.
     insert_sales_org_ic( out = out ).
     insert_sales_org_texts( out = out ).
+    commit work.
   ENDMETHOD.
 ENDCLASS.

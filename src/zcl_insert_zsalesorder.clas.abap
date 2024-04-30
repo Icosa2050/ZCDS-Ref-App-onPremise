@@ -114,6 +114,7 @@ CLASS zcl_insert_zsalesorder IMPLEMENTATION.
 
     MODIFY zsalesorder FROM TABLE @lt_zsalesorder.
     IF sy-subrc = 0.
+      commit work.
       out->write(  'Data modification was successfully' ).
       CLEAR lt_zsalesorder.
       SELECT * FROM zsalesorder INTO TABLE @lt_zsalesorder.

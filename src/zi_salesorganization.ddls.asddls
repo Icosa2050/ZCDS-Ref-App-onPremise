@@ -13,6 +13,8 @@ define root view entity ZI_SalesOrganization
   as select from zsalesorg
   composition [0..1] of ZI_SALESORGTEXT as _Text
 {
+
+  @Consumption.valueHelpDefinition: [{entity:{name:'ZI_SalesOrganization',element:'SalesOrganization'},useForValidation: true}]
   key salesorganization as Salesorganization,
       _Text
 }
