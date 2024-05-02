@@ -53,7 +53,9 @@ authorization master ( global, instance )
   function GetNumberOfItems deep result [1] ZD_SalesOrderGetNumberofItemsR;
   function GetSalesOrder deep result [1] ZD_SalesOrderGetResult;
 
-  determination CalculateTotalNetAmount on modify { field NetAmount, TransactionCurrency; }
+  //determination CalculateTotalNetAmount on modify { field NetAmount, TransactionCurrency; }
+  //determination CalculateTotalNetAmount on save { create;field NetAmount, TransactionCurrency; }
+  determination CalculateTotalNetAmount on save { create; }
   validation VerifySoldToParty on save { field SoldToParty; }
   determine action Check
   {
@@ -142,8 +144,11 @@ authorization dependent by _SalesOrder
     parameter ZD_SALESORDERITEMCOPYPARAMETER
     result [1..*] $self;
 
-  determination CalculateTotalAmount on save { field Product, OrderQuantity, OrderQuantityUnit; }
-  determination CalculateNetAmount on modify { field NetAmount, TransactionCurrency; }
+  //determination CalculateTotalAmount on save { field Product, OrderQuantity, OrderQuantityUnit; }
+  determination CalculateTotalAmount on save { field Product; }
+  //determination CalculateNetAmount on save { field NetAmount, TransactionCurrency; }
+  //determination CalculateNetAmount on save { field TransactionCurrency; }
+  //determination CalculateNetAmount on modify { field NetAmount, TransactionCurrency; }
   validation VerifyProduct on save { field Product; }
   /*
   side effects

@@ -1,4 +1,4 @@
-@EndUserText.label: 'projection'
+@EndUserText.label: 'sales order'
 define service ZUI_CSALESORDERTP {
   expose ZC_SalesOrderTP;
   expose ZC_SalesOrderItemTP;

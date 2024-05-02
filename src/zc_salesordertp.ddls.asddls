@@ -9,8 +9,10 @@ define root view entity ZC_SalesOrderTP
 {
   key SalesOrder,
       SalesOrderType,
-      @Consumption.valueHelpDefinition: [{entity:{name:'ZI_SalesOrganization',element:'SalesOrganization'},useForValidation: true}]
+      @ObjectModel.text.element: ['Description']
+      @Consumption.valueHelpDefinition: [{entity:{name:'ZI_SalesOrganization',element: 'SalesOrganization'}}]
       SalesOrganization,
+      _Salesorganization.Description,
       @ObjectModel.text.element: ['CustomerName']
       @Consumption.valueHelpDefinition: [{entity:{name:'ZI_Customer',element: 'Customer'}}]
       SoldToParty,
@@ -26,7 +28,7 @@ define root view entity ZC_SalesOrderTP
       DeletionIndicator,
       @ObjectModel.text.element: ['CreatedByUserDescription']
       CreatedByUser,
-      _CreatedByUser.UserDescription as CreatedByUserDescription,
+      _CreatedByUser.UserDescription     as CreatedByUserDescription,
       CreationDateTime,
       @ObjectModel.text.element: ['LastChangedByUserDescription']
       LastChangedByUser,

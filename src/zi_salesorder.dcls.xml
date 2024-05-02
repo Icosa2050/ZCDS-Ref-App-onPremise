@@ -4,6 +4,7 @@
   <asx:values>
    <DCLS>
     <DCLNAME>ZI_SALESORDER</DCLNAME>
+    <DCLLANGUAGE>E</DCLLANGUAGE>
    </DCLS>
   </asx:values>
  </asx:abap>

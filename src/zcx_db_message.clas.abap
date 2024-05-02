@@ -22,19 +22,5 @@ ENDCLASS.
 
 
 
-CLASS zcx_db_message IMPLEMENTATION.
-
-
-  METHOD constructor ##ADT_SUPPRESS_GENERATION.
-    CALL METHOD super->constructor
-      EXPORTING
-        previous = previous.
-    me->msgty = msgty .
-    CLEAR me->textid.
-    IF textid IS INITIAL.
-      if_t100_message~t100key = if_t100_message=>default_textid.
-    ELSE.
-      if_t100_message~t100key = textid.
-    ENDIF.
-  ENDMETHOD.
+CLASS ZCX_DB_MESSAGE IMPLEMENTATION.
 ENDCLASS.

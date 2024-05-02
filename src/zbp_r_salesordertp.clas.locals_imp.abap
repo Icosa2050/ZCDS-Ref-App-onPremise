@@ -123,7 +123,7 @@ CLASS lhc_SalesOrder DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS getnumberofitems FOR READ
       IMPORTING keys FOR FUNCTION salesorder~getnumberofitems RESULT result.
     METHODS getSalesOrder FOR READ IMPORTING keys FOR FUNCTION SalesOrder~getSalesOrder RESULT result.
-    METHODS CalculateTotalNetAmount FOR DETERMINE ON MODIFY
+    METHODS CalculateTotalNetAmount FOR DETERMINE ON SAVE
       IMPORTING keys FOR SalesOrder~CalculateTotalNetAmount.
     METHODS VerifySoldToParty FOR VALIDATE ON SAVE
       IMPORTING keys FOR SalesOrder~VerifySoldToParty.
@@ -161,15 +161,15 @@ CLASS lhc_SalesOrder IMPLEMENTATION.
       READ TABLE salesorders ASSIGNING FIELD-SYMBOL(<salesorder>) WITH KEY id COMPONENTS %tky = <key>-%tky.
       IF sy-subrc = 0.
         "authority check
-        "        AUTHORITY-CHECK OBJECT 'Z_VBAK_VK'
-        "        ID 'ACTVT' FIELD '03'
-        "        ID 'ZAUART' FIELD <salesorder>-SalesOrderType.
-        "        IF sy-subrc <> 0.
-        "          APPEND VALUE #( %tky = <salesorder>-%tky
-        "          %fail-cause = if_abap_behv=>cause-unauthorized
-        "          ) TO failed-salesorder.
-        "          CONTINUE.
-        "        ENDIF.
+                AUTHORITY-CHECK OBJECT 'Z_VBAK_VK'
+                ID 'ACTVT' FIELD '03'
+                ID 'ZAUART' FIELD <salesorder>-SalesOrderType.
+                IF sy-subrc <> 0.
+                  APPEND VALUE #( %tky = <salesorder>-%tky
+                  %fail-cause = if_abap_behv=>cause-unauthorized
+                  ) TO failed-salesorder.
+                  CONTINUE.
+                ENDIF.
         APPEND VALUE #( SalesOrder = <salesorder>-SalesOrder )
         TO result
         ASSIGNING FIELD-SYMBOL(<result>).
@@ -200,8 +200,8 @@ CLASS lhc_SalesOrder IMPLEMENTATION.
       IF requested_authorizations-%update = if_abap_behv=>mk-on
       OR requested_authorizations-%action-Edit = if_abap_behv=>mk-on.
         AUTHORITY-CHECK OBJECT 'Z_VBAK_VK'
-          ID 'ACTVT' FIELD '02'
-          ID 'AUART' FIELD <salesorder>-SalesOrderType.
+          ID 'ACTVT' FIELD '02'.
+          "ID 'AUART' FIELD <salesorder>-SalesOrderType.
         IF sy-subrc <> 0.
           APPEND VALUE #( %tky    = <salesorder>-%tky
                           %update = if_abap_behv=>auth-unauthorized
@@ -217,8 +217,9 @@ CLASS lhc_SalesOrder IMPLEMENTATION.
       ENDIF.
       IF requested_authorizations-%delete = if_abap_behv=>mk-on.
         AUTHORITY-CHECK OBJECT 'Z_VBAK_VK'
-          ID 'ACTVT' FIELD '06'
-          ID 'AUART' FIELD <salesorder>-SalesOrderType.
+          ID 'ACTVT' FIELD '06'.
+          "ID 'AUART' FIELD <salesorder>-SalesOrderType.
+          "ID 'AUART' FIELD <salesorder>-SalesOrderType.
         IF sy-subrc <> 0.
           APPEND VALUE #( %tky           = <salesorder>-%tky
                           %delete = if_abap_behv=>auth-unauthorized
@@ -272,7 +273,7 @@ CLASS lhc_SalesOrder IMPLEMENTATION.
     IF requested_authorizations-%create = if_abap_behv=>mk-on.
       AUTHORITY-CHECK OBJECT 'Z_VBAK_VK'
         ID 'ACTVT' FIELD '01'
-        ID 'ZAUART' DUMMY.
+        ID 'ZKVORG' DUMMY.
       IF sy-subrc <> 0.
         result-%create = if_abap_behv=>auth-unauthorized.
         APPEND VALUE #( %global = if_abap_behv=>mk-on
@@ -286,7 +287,7 @@ CLASS lhc_SalesOrder IMPLEMENTATION.
       IF requested_authorizations-%update = if_abap_behv=>mk-on.
         AUTHORITY-CHECK OBJECT 'Z_VBAK_VK'
           ID 'ACTVT' FIELD '02'
-          ID 'AUART' DUMMY.
+          ID 'ZVKORG' DUMMY.
         IF sy-subrc <> 0.
           result-%update = if_abap_behv=>auth-unauthorized.
           APPEND VALUE #( %global = if_abap_behv=>mk-on
@@ -300,7 +301,7 @@ CLASS lhc_SalesOrder IMPLEMENTATION.
       IF requested_authorizations-%Delete = if_abap_behv=>mk-on.
         AUTHORITY-CHECK OBJECT 'Z_VBAK_VK'
           ID 'ACTVT' FIELD '06'
-          ID 'AUART' DUMMY.
+          ID 'ZVKORG' DUMMY.
         IF sy-subrc <> 0.
           result-%Delete = if_abap_behv=>auth-unauthorized.
           APPEND VALUE #( %global = if_abap_behv=>mk-on
@@ -477,7 +478,7 @@ CLASS lhc_SalesOrder IMPLEMENTATION.
     WHERE %control-SalesOrderType = if_abap_behv=>mk-on.
       AUTHORITY-CHECK OBJECT 'Z_VBAK_VK'
       ID 'ACTVT' FIELD '02'
-      ID 'ZAUART' FIELD <salesorder>-SalesOrderType.
+      ID 'ZVKORG' FIELD <salesorder>-SalesOrderType.
       IF sy-subrc <> 0.
         APPEND VALUE #( %cid = <salesorder>-%cid_ref
                 %tky = <salesorder>-%tky
@@ -532,8 +533,8 @@ CLASS lhc_salesorderitem DEFINITION INHERITING FROM cl_abap_behavior_handler.
       IMPORTING REQUEST requested_authorizations FOR SalesOrderItem RESULT result.
     METHODS CalculateTotalAmount FOR DETERMINE ON SAVE
       IMPORTING keys FOR SalesOrderItem~CalculateTotalAmount.
-    METHODS CalculateNetAmount FOR DETERMINE ON MODIFY
-      IMPORTING keys FOR SalesOrderItem~CalculateNetAmount.
+    "METHODS CalculateNetAmount FOR DETERMINE ON SAVE
+    "  IMPORTING keys FOR SalesOrderItem~CalculateNetAmount.
     METHODS VerifyProduct FOR VALIDATE ON SAVE
       IMPORTING keys FOR SalesOrderItem~VerifyProduct.
     METHODS get_instance_features FOR INSTANCE FEATURES
@@ -631,37 +632,38 @@ CLASS lhc_salesorderitem IMPLEMENTATION.
   METHOD get_global_authorizations.
   ENDMETHOD.
 
-  METHOD calculatenetamount.
-
-    "please note that for the sake of simplicity in this example
-    "we assume to have only one transaction currency, e.g. USD
-    READ ENTITY IN LOCAL MODE ZR_SalesOrderItemTP
-      FIELDS ( OrderQuantity Product )
-      WITH CORRESPONDING #( keys )
-      RESULT DATA(salesorderitems).
-
-    SELECT product, price, currency FROM zi_product WITH PRIVILEGED ACCESS
-      FOR ALL ENTRIES IN @salesorderitems
-      WHERE product = @salesorderitems-Product
-      INTO TABLE @DATA(products).
-
-    DATA updates TYPE TABLE FOR UPDATE ZR_SalesOrderItemTP.
-
-    LOOP AT salesorderitems ASSIGNING FIELD-SYMBOL(<salesorderitem>).
-      READ TABLE products ASSIGNING FIELD-SYMBOL(<product>)
-        WITH KEY Product = <salesorderitem>-Product.
-      CHECK sy-subrc = 0.
-      APPEND VALUE #( %tky                         = <salesorderitem>-%tky
-                      NetAmount                    = <salesorderitem>-OrderQuantity * <product>-Price
-                      TransactionCurrency          = <product>-Currency
-                      %control-NetAmount           = if_abap_behv=>mk-on
-                      %control-TransactionCurrency = if_abap_behv=>mk-on )
-        TO updates.
-    ENDLOOP.
-
-    MODIFY ENTITY IN LOCAL MODE ZR_SalesOrderItemTP
-      UPDATE FIELDS ( NetAmount TransactionCurrency ) WITH updates.
-  ENDMETHOD.
+"  METHOD calculatenetamount.
+"
+"    "please note that for the sake of simplicity in this example
+"    "we assume to have only one transaction currency, e.g. USD
+"    READ ENTITY IN LOCAL MODE ZR_SalesOrderItemTP
+"      FIELDS ( OrderQuantity Product )
+"      WITH CORRESPONDING #( keys )
+"      RESULT DATA(salesorderitems).
+"
+"    SELECT product, price, currency FROM zi_product WITH PRIVILEGED ACCESS
+"      FOR ALL ENTRIES IN @salesorderitems
+"      WHERE product = @salesorderitems-Product
+"      INTO TABLE @DATA(products).
+"
+"    DATA updates TYPE TABLE FOR UPDATE ZR_SalesOrderItemTP.
+"
+"    LOOP AT salesorderitems ASSIGNING FIELD-SYMBOL(<salesorderitem>).
+"      READ TABLE products ASSIGNING FIELD-SYMBOL(<product>)
+"        WITH KEY Product = <salesorderitem>-Product.
+"      CHECK sy-subrc = 0.
+"      APPEND VALUE #( %tky                         = <salesorderitem>-%tky
+"                      NetAmount                    = <salesorderitem>-OrderQuantity * <product>-Price
+""                      "TransactionCurrency          = <product>-Currency
+"                      "%control-NetAmount           = if_abap_behv=>mk-on
+"                      "%control-TransactionCurrency = if_abap_behv=>mk-on
+"                      )
+"        TO updates.
+"    ENDLOOP.
+"
+"    MODIFY ENTITY IN LOCAL MODE ZR_SalesOrderItemTP
+"      UPDATE FIELDS ( NetAmount TransactionCurrency ) WITH updates.
+"  ENDMETHOD.
 
   METHOD calculatetotalamount.
 
@@ -687,7 +689,9 @@ CLASS lhc_salesorderitem IMPLEMENTATION.
                       NetAmount                    = <salesorderitem>-OrderQuantity * <product>-Price
                       TransactionCurrency          = <product>-Currency
                       %control-NetAmount           = if_abap_behv=>mk-on
-                      %control-TransactionCurrency = if_abap_behv=>mk-on )
+                      %control-TransactionCurrency = if_abap_behv=>mk-on
+
+                      )
         TO updates.
     ENDLOOP.
 

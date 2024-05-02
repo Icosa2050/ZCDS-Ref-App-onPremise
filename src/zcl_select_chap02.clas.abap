@@ -40,10 +40,10 @@ CLASS zcl_select_chap02 IMPLEMENTATION.
 *
 *####################################################################
 
-    SELECT SINGLE *
-      FROM z_viewwithsearchsupport
-      WHERE salesorderitem LIKE '%1'
-    INTO @DATA(ls_z_viewwithsearchsupport).
+*    SELECT SINGLE *
+*      FROM z_viewwithsearchsupport
+*      WHERE salesorderitem LIKE '%1'
+*    INTO @DATA(ls_z_viewwithsearchsupport).
 
 *####################################################################
 
@@ -87,31 +87,31 @@ CLASS zcl_select_chap02 IMPLEMENTATION.
 
 *####################################################################
 
-    SELECT *
-      FROM z_viewwithoptionalparameters
-      INTO TABLE @DATA(lt_z_viewwithoptionalparams).
-
-*####################################################################
-
-    data(lv_current_date) = cl_abap_context_info=>get_system_date( ).
-
-    SELECT *
-      FROM z_viewwithoptionalparameters( p_keydate = @lv_current_date )
-      INTO TABLE @DATA(lt_z_viewwithoptionalparamete2).
-
-*####################################################################
-
-    SELECT *
-      FROM z_viewwithoptionalparameters( p_keydate = @lv_current_date )
-      INTO TABLE @DATA(lt_z_viewwithoptionalparamete3).
-
-*####################################################################
-
-    SELECT *
-      FROM z_viewwithparameters( p_keydate = @lv_current_date, p_language = 'E' )
-      INTO TABLE @DATA(lt_z_viewwithparameter).
-
-*####################################################################
+*    SELECT *
+*      FROM z_viewwithoptionalparameters
+*      INTO TABLE @DATA(lt_z_viewwithoptionalparams).
+*
+**####################################################################
+*
+*    data(lv_current_date) = cl_abap_context_info=>get_system_date( ).
+*
+*    SELECT *
+*      FROM z_viewwithoptionalparameters( p_keydate = @lv_current_date )
+*      INTO TABLE @DATA(lt_z_viewwithoptionalparamete2).
+*
+**####################################################################
+*
+*    SELECT *
+*      FROM z_viewwithoptionalparameters( p_keydate = @lv_current_date )
+*      INTO TABLE @DATA(lt_z_viewwithoptionalparamete3).
+*
+**####################################################################
+*
+*    SELECT *
+*      FROM z_viewwithparameters( p_keydate = @lv_current_date, p_language = 'E' )
+*      INTO TABLE @DATA(lt_z_viewwithparameter).
+*
+**####################################################################
 
     SELECT *
        FROM zi_salesorder
@@ -221,72 +221,72 @@ CLASS zcl_select_chap02 IMPLEMENTATION.
 
 *####################################################################
 
-    SELECT *
-      FROM z_viewwithnullvalues
-      WHERE fielda EQ 'A'
-      INTO TABLE @DATA(lt_null_values_1).
-
-    SELECT *
-      FROM z_viewwithnullvalues
-      WHERE NOT fielda EQ 'A'
-      INTO TABLE @DATA(lt_null_values_2).
-
-    SELECT *
-      FROM z_viewwithnullvalues
-      WHERE fieldb NE 'B'
-      INTO TABLE @DATA(lt_null_values_3).
-
-    SELECT *
-      FROM z_viewwithnullvalues
-      WHERE fieldc NE 'C'
-      INTO TABLE @DATA(lt_null_values_4).
-
-    SELECT COUNT( DISTINCT fielda ) AS count_a,
-           COUNT( DISTINCT fieldb ) AS count_b,
-           COUNT( DISTINCT fieldc ) AS count_c
-      FROM z_viewwithnullvalues
-      INTO TABLE @DATA(lt_null_values_5).
-
-*####################################################################
-
-    SELECT z_viewwithdifferentdatatypes~castnumc
-      FROM z_viewwithdifferentdatatypes
-      WHERE z_viewwithdifferentdatatypes~castnumc IS INITIAL
-      INTO TABLE @DATA(lt_castnumc_1).
-
-    SELECT z_viewwithdifferentdatatypes~numc0000000000
-      FROM z_viewwithdifferentdatatypes
-      WHERE z_viewwithdifferentdatatypes~numc0000000000 IS INITIAL
-      INTO TABLE @DATA(lt_castnumc_2).
-
-    SELECT z_viewwithdifferentdatatypes~castchar
-      FROM z_viewwithdifferentdatatypes
-      WHERE z_viewwithdifferentdatatypes~castchar IS INITIAL
-      INTO TABLE @DATA(lt_castnumc_3).
-
-    SELECT z_viewwithdifferentdatatypes~char0000000000
-      FROM z_viewwithdifferentdatatypes
-      WHERE z_viewwithdifferentdatatypes~char0000000000 IS INITIAL
-      INTO TABLE @DATA(lt_castnumc_4).
-
-    SELECT *
-      FROM z_viewwithdifferentdatatypes
-      INTO TABLE @DATA(lt_castnumc_5).
-
-    SELECT SINGLE *
-      FROM z_viewwithdifferentdatatypes
-      WHERE z_viewwithdifferentdatatypes~castchar NE z_viewwithdifferentdatatypes~numc0000000000
-      INTO @DATA(ls_castnumc_6).
-
-    IF ( ls_castnumc_6-castchar EQ ls_castnumc_6-numc0000000000 ).
-    ELSE.
-    ENDIF.
-
-    SELECT SINGLE *
-      FROM z_viewwithdifferentdatatypes
-      WHERE z_viewwithdifferentdatatypes~castchar EQ z_viewwithdifferentdatatypes~numc0000000000
-      INTO @DATA(ls_castnumc_7).
-
+*    SELECT *
+*      FROM z_viewwithnullvalues
+*      WHERE fielda EQ 'A'
+*      INTO TABLE @DATA(lt_null_values_1).
+*
+*    SELECT *
+*      FROM z_viewwithnullvalues
+*      WHERE NOT fielda EQ 'A'
+*      INTO TABLE @DATA(lt_null_values_2).
+*
+*    SELECT *
+*      FROM z_viewwithnullvalues
+*      WHERE fieldb NE 'B'
+*      INTO TABLE @DATA(lt_null_values_3).
+*
+*    SELECT *
+*      FROM z_viewwithnullvalues
+*      WHERE fieldc NE 'C'
+*      INTO TABLE @DATA(lt_null_values_4).
+*
+*    SELECT COUNT( DISTINCT fielda ) AS count_a,
+*           COUNT( DISTINCT fieldb ) AS count_b,
+*           COUNT( DISTINCT fieldc ) AS count_c
+*      FROM z_viewwithnullvalues
+*      INTO TABLE @DATA(lt_null_values_5).
+*
+**####################################################################
+*
+*    SELECT z_viewwithdifferentdatatypes~castnumc
+*      FROM z_viewwithdifferentdatatypes
+*      WHERE z_viewwithdifferentdatatypes~castnumc IS INITIAL
+*      INTO TABLE @DATA(lt_castnumc_1).
+*
+*    SELECT z_viewwithdifferentdatatypes~numc0000000000
+*      FROM z_viewwithdifferentdatatypes
+*      WHERE z_viewwithdifferentdatatypes~numc0000000000 IS INITIAL
+*      INTO TABLE @DATA(lt_castnumc_2).
+*
+*    SELECT z_viewwithdifferentdatatypes~castchar
+*      FROM z_viewwithdifferentdatatypes
+*      WHERE z_viewwithdifferentdatatypes~castchar IS INITIAL
+*      INTO TABLE @DATA(lt_castnumc_3).
+*
+*    SELECT z_viewwithdifferentdatatypes~char0000000000
+*      FROM z_viewwithdifferentdatatypes
+*      WHERE z_viewwithdifferentdatatypes~char0000000000 IS INITIAL
+*      INTO TABLE @DATA(lt_castnumc_4).
+*
+*    SELECT *
+*      FROM z_viewwithdifferentdatatypes
+*      INTO TABLE @DATA(lt_castnumc_5).
+*
+*    SELECT SINGLE *
+*      FROM z_viewwithdifferentdatatypes
+*      WHERE z_viewwithdifferentdatatypes~castchar NE z_viewwithdifferentdatatypes~numc0000000000
+*      INTO @DATA(ls_castnumc_6).
+*
+*    IF ( ls_castnumc_6-castchar EQ ls_castnumc_6-numc0000000000 ).
+*    ELSE.
+*    ENDIF.
+*
+*    SELECT SINGLE *
+*      FROM z_viewwithdifferentdatatypes
+*      WHERE z_viewwithdifferentdatatypes~castchar EQ z_viewwithdifferentdatatypes~numc0000000000
+*      INTO @DATA(ls_castnumc_7).
+*
 
 
   ENDMETHOD.
