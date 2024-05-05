@@ -123,7 +123,7 @@ CLASS lhc_SalesOrder DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS getnumberofitems FOR READ
       IMPORTING keys FOR FUNCTION salesorder~getnumberofitems RESULT result.
     METHODS getSalesOrder FOR READ IMPORTING keys FOR FUNCTION SalesOrder~getSalesOrder RESULT result.
-    METHODS CalculateTotalNetAmount FOR DETERMINE ON SAVE
+    METHODS CalculateTotalNetAmount FOR DETERMINE ON MODIFY
       IMPORTING keys FOR SalesOrder~CalculateTotalNetAmount.
     METHODS VerifySoldToParty FOR VALIDATE ON SAVE
       IMPORTING keys FOR SalesOrder~VerifySoldToParty.
@@ -531,7 +531,7 @@ CLASS lhc_salesorderitem DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS get_global_authorizations FOR GLOBAL AUTHORIZATION
       IMPORTING REQUEST requested_authorizations FOR SalesOrderItem RESULT result.
-    METHODS CalculateTotalAmount FOR DETERMINE ON SAVE
+    METHODS CalculateTotalAmount FOR DETERMINE ON MODIFY
       IMPORTING keys FOR SalesOrderItem~CalculateTotalAmount.
     "METHODS CalculateNetAmount FOR DETERMINE ON SAVE
     "  IMPORTING keys FOR SalesOrderItem~CalculateNetAmount.

@@ -55,7 +55,7 @@ authorization master ( global, instance )
 
   //determination CalculateTotalNetAmount on modify { field NetAmount, TransactionCurrency; }
   //determination CalculateTotalNetAmount on save { create;field NetAmount, TransactionCurrency; }
-  determination CalculateTotalNetAmount on save { create; }
+  determination CalculateTotalNetAmount on modify { create; }
   validation VerifySoldToParty on save { field SoldToParty; }
   determine action Check
   {
@@ -145,7 +145,8 @@ authorization dependent by _SalesOrder
     result [1..*] $self;
 
   //determination CalculateTotalAmount on save { field Product, OrderQuantity, OrderQuantityUnit; }
-  determination CalculateTotalAmount on save { field Product; }
+  //determination CalculateTotalAmount on save { field Product; }
+  determination CalculateTotalAmount on modify { create; }
   //determination CalculateNetAmount on save { field NetAmount, TransactionCurrency; }
   //determination CalculateNetAmount on save { field TransactionCurrency; }
   //determination CalculateNetAmount on modify { field NetAmount, TransactionCurrency; }
@@ -172,7 +173,7 @@ persistent table zsalesordersline
 draft table zsalesorderslind
 lock dependent by _SalesOrder
 authorization dependent by _SalesOrder
-etag master LastChangeDateTime
+//etag master LastChangeDateTime
 //changedocuments master ( zsalesorder )
 {
   update ( features : instance );
