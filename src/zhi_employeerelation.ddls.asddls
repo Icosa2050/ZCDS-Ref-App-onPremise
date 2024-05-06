@@ -7,11 +7,11 @@
     sizeCategory: #S,
     dataClass: #MIXED
 }
-define view entity ZHI_EmployeeRelation as select from ZHP_EmployeeRelation
+define root view entity ZHI_EmployeeRelation as select from ZHP_EmployeeRelation
 association [0..1] to ZHI_EmployeeRelation as _Manager  on $projection.Manager = _Manager.Employee
 association [0..1] to ZHI_Employee as _Employee on $projection.Employee = _Employee.Employee
 {
-    Employee,
+    key Employee,
     _Employee,
     Manager,
     _Manager

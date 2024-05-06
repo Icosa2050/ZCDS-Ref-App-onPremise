@@ -13,3 +13,4 @@ define view entity ZHP_EmployeeRelation as select from zhp_employeerel
     manager as Manager,
     demoset as Demoset
 }
+where demoset='1'

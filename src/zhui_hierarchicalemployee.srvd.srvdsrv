@@ -1,0 +1,4 @@
+@EndUserText.label: 'employees'
+define service ZHUI_HIERARCHICALEMPLOYEE {
+  expose ZHC_HIERARCHICALEMPLOYEE;
+}

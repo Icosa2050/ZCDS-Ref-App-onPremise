@@ -1,5 +1,5 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
-@EndUserText.label: 'hierarchy 01'
+@EndUserText.label: 'hierarchy 03'
 @ObjectModel.usageType:{
     serviceQuality: #X,
     sizeCategory: #S,
@@ -19,6 +19,7 @@ as parent child hierarchy (
     key Employee,
     /* Associations */
     _Employee,
+@ObjectModel.foreignKey.association: '_Employee'
     Manager,
     /* Associations */
     _Manager
