@@ -2,9 +2,7 @@
 "BASEINFO":
 {
 "FROM":
-[
-"T000"
-],
+[],
 "ASSOCIATED":
 [],
 "BASE":

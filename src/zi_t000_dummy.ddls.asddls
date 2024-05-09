@@ -1,6 +1,6 @@
 @AbapCatalog.viewEnhancementCategory: [#NONE]
-@AccessControl.authorizationCheck: #CHECK
-@EndUserText.label: 'dummy view for access restriction'
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'dummy view for forbidden table T001'
 @Metadata.ignorePropagatedAnnotations: true
 @ObjectModel.usageType:{
     serviceQuality: #X,

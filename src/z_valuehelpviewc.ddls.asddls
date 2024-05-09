@@ -14,7 +14,7 @@
 
 //@Consumption.ranked:true
 
-define view entity Z_ValueHelpViewB
+define view entity Z_ValueHelpViewC
 
   as select distinct from t000 
 

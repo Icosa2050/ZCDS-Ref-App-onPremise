@@ -25,6 +25,7 @@ define view entity Z_ViewWithSearchSupport
 //    @Search.fuzzinessThreshold: 0.7
 
 //    @Search.ranking: #HIGH
+@ObjectModel.text.element: [ 'SalesOrderItem' ]
 
     key concat( SalesOrder, SalesOrderItem ) as SalesOrderItem,
 
@@ -55,4 +56,5 @@ define view entity Z_ViewWithSearchSupport
     OrderQuantityUnit
 
 }
+
 
