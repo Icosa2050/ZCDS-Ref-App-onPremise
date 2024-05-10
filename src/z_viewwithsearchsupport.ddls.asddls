@@ -6,55 +6,63 @@
 
 @Search.searchable: true
 
-define view entity Z_ViewWithSearchSupport 
+define view entity Z_ViewWithSearchSupport
 
-  as select from ZI_SalesOrderItem 
+  as select from ZI_SalesOrderItem
 
 {
 
-    @Search.defaultSearchElement: true
+      @Search.defaultSearchElement: true
 
-    @Search.fuzzinessThreshold: 0.4
+      @Search.fuzzinessThreshold: 0.4
 
-    @Search.ranking: #HIGH
+      @Search.ranking: #HIGH
 
-    key SalesOrder,
+  key SalesOrder,
 
-//    @Search.defaultSearchElement: true
+      //      @Search.defaultSearchElement: true
 
-//    @Search.fuzzinessThreshold: 0.7
+      //            @Search.fuzzinessThreshold: 0.7
 
-//    @Search.ranking: #HIGH
-@ObjectModel.text.element: [ 'SalesOrderItem' ]
+      //            @Search.ranking: #HIGH
 
-    key concat( SalesOrder, SalesOrderItem ) as SalesOrderItem,
+      @EndUserText.label: 'Combined Sales Order Item'
 
-    @Search.defaultSearchElement: true
+  key concat( SalesOrder, SalesOrderItem ) as SalesOrderItem,
 
-    @Search.fuzzinessThreshold: 0.7
+      @Search.defaultSearchElement: true
 
-    @Search.ranking: #HIGH
+      @Search.fuzzinessThreshold: 0.7
 
-    @Consumption.hidden:true
+      @Search.ranking: #HIGH
 
-    SalesOrderItem as SalesOrderItemForSearch,
+      @Consumption.hidden:true
 
-    @Search.defaultSearchElement: true
+      SalesOrderItem                       as SalesOrderItemForSearch,
 
-    @Search.fuzzinessThreshold: 1.0
+      @Search.defaultSearchElement: true
 
-    @Search.ranking: #MEDIUM
+      @Search.fuzzinessThreshold: 1.0
 
-    Product,
+      @Search.ranking: #MEDIUM
 
-    _Product.ProductType,
+      Product,
 
-    @Semantics.quantity.unitOfMeasure: 'OrderQuantityUnit'
+      _Product.ProductType,
 
-    OrderQuantity,
+      @Semantics.quantity.unitOfMeasure: 'OrderQuantityUnit'
+      @Search.defaultSearchElement: true
 
-    OrderQuantityUnit
+      @Search.fuzzinessThreshold: 1.0
+
+      @Search.ranking: #MEDIUM
+
+
+      OrderQuantity,
+
+
+      @EndUserText.label: 'Order Quantity Unit'
+
+      OrderQuantityUnit
 
 }
-
-

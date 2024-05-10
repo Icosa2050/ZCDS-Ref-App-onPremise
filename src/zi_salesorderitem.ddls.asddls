@@ -1,7 +1,7 @@
+@Metadata.ignorePropagatedAnnotations: true
 @AbapCatalog.viewEnhancementCategory: [#NONE]
 @AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Sales Order Item'
-@Metadata.ignorePropagatedAnnotations: true
 @Metadata.allowExtensions: true
 @ObjectModel.usageType:{
     serviceQuality: #X,
@@ -28,7 +28,9 @@ define view entity ZI_SalesOrderItem
   key salesorderitem      as SalesOrderItem,
       product             as Product,
       @Semantics.quantity.unitOfMeasure: 'OrderQuantityUnit'
+      @EndUserText.label: 'Order Quantity'
       orderquantity       as OrderQuantity,
+      @EndUserText.label: 'Order Quantity Unit'
       orderquantityunit   as OrderQuantityUnit,
       @Semantics.amount.currencyCode: 'TransactionCurrency'
       netamount           as NetAmount,
