@@ -1,4 +1,4 @@
-@AccessControl.authorizationCheck: #CHECK
+@AccessControl.authorizationCheck: #NOT_REQUIRED
 
 @EndUserText.label: 'View with Search Support'
 
@@ -19,6 +19,17 @@ define view entity Z_ViewWithSearchSupport
       @Search.ranking: #HIGH
 
   key SalesOrder,
+      @Search.defaultSearchElement: true
+
+      @Search.fuzzinessThreshold: 0.7
+
+      @Search.ranking: #HIGH
+
+      @Consumption.hidden:true
+
+  key SalesOrderItem                       as SalesOrderItemForSearch,
+
+
 
       //      @Search.defaultSearchElement: true
 
@@ -28,17 +39,7 @@ define view entity Z_ViewWithSearchSupport
 
       @EndUserText.label: 'Combined Sales Order Item'
 
-  key concat( SalesOrder, SalesOrderItem ) as SalesOrderItem,
-
-      @Search.defaultSearchElement: true
-
-      @Search.fuzzinessThreshold: 0.7
-
-      @Search.ranking: #HIGH
-
-      @Consumption.hidden:true
-
-      SalesOrderItem                       as SalesOrderItemForSearch,
+      concat( SalesOrder, SalesOrderItem ) as SalesOrderItem,
 
       @Search.defaultSearchElement: true
 
