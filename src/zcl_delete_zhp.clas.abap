@@ -243,7 +243,9 @@ CLASS zcl_delete_zhp IMPLEMENTATION.
     CLEAR ls_zhp_employee.
 
     LOOP AT lt_zhp_employee INTO ls_zhp_employee.
-      INSERT zhp_employee FROM ls_zhp_employee.
+      INSERT zhp_employee FROM @ls_zhp_employee.
+
+
       IF sy-subrc <> 0.
         out->write( 'Data modification failed' ).
         out->write(  ls_zhp_employee  ).

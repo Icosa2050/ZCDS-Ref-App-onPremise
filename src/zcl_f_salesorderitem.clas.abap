@@ -8,7 +8,7 @@ CLASS zcl_f_salesorderitem DEFINITION
     "INTERFACES if_sadl_exit .
     INTERFACES if_sadl_exit_calc_element_read .
     "INTERFACES if_sadl_exit_filter_transform .
-    INTERFACES if_sadl_exit_sort_transform .
+    "INTERFACES if_sadl_exit_sort_transform .
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.
@@ -54,20 +54,6 @@ CLASS ZCL_F_SALESORDERITEM IMPLEMENTATION.
     INSERT CONV #( 'NETAMOUNT' ) INTO TABLE et_requested_orig_elements.
   ENDMETHOD.
 
-
-* <SIGNATURE>---------------------------------------------------------------------------------------+
-* | Instance Public Method ZCL_F_SALESORDERITEM->IF_SADL_EXIT_SORT_TRANSFORM~MAP_ELEMENT
-* +-------------------------------------------------------------------------------------------------+
-* | [--->] IV_ENTITY                      TYPE        STRING
-* | [--->] IV_ELEMENT                     TYPE        STRING
-* | [<---] ET_SORT_ELEMENTS               TYPE        TT_SORT_ELEMENTS
-* | [!CX!] CX_SADL_EXIT
-* +--------------------------------------------------------------------------------------</SIGNATURE>
-  METHOD if_sadl_exit_sort_transform~map_element.
-    ASSERT iv_entity = 'ZC_SALESORDERITEMTP'.
-    ASSERT iv_element = 'ORDERISFREEOFCHARGE'.
-    APPEND VALUE #( name = 'NETAMOUNT' reverse = abap_true ) TO et_sort_elements.
-  ENDMETHOD.
 ENDCLASS.
 
 

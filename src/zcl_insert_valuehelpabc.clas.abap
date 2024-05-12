@@ -55,7 +55,7 @@ CLASS zcl_insert_valuehelpabc IMPLEMENTATION.
     INSERT ls_a INTO TABLE lt_a.
 
 
-    INSERT zvaluehelpa FROM TABLE lt_a.
+    INSERT zvaluehelpa FROM TABLE @lt_a.
     IF sy-subrc <> 0.
       out->write( 'Data modification failed' ).
     ELSE.
@@ -97,7 +97,8 @@ CLASS zcl_insert_valuehelpabc IMPLEMENTATION.
     INSERT ls_b INTO TABLE lt_b.
 
 
-    INSERT zvaluehelpb FROM TABLE lt_b.
+    INSERT zvaluehelpb FROM TABLE @lt_b.
+
     IF sy-subrc <> 0.
       out->write( 'Data modification failed' ).
       out->write(  ls_b  ).

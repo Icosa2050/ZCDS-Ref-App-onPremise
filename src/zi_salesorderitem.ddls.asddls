@@ -1,8 +1,18 @@
 @Metadata.ignorePropagatedAnnotations: true
-@AbapCatalog.viewEnhancementCategory: [#NONE]
 @AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Sales Order Item'
 @Metadata.allowExtensions: true
+@AbapCatalog.extensibility: {
+extensible:true,
+elementSuffix:'ZSI',
+allowNewDatasources:false,
+dataSources: ['_Extension'],
+quota: {
+maximumFields:1000,
+maximumBytes:10000
+}
+
+}
 @ObjectModel.usageType:{
     serviceQuality: #X,
     sizeCategory: #S,
@@ -14,13 +24,14 @@
 define view entity ZI_SalesOrderItem
   as select from zsalesorderitem
 
-  association [0..1] to ZI_Product                as _Product
-    on $projection.Product = _Product.Product
+  association [0..1] to ZI_Product                as _Product    on  $projection.Product = _Product.Product
 
   composition [0..*] of ZI_SalesOrderScheduleLine as _ScheduleLine
 
-  association        to parent ZI_SalesOrder      as _SalesOrder
-    on $projection.SalesOrder = _SalesOrder.SalesOrder
+  association        to parent ZI_SalesOrder      as _SalesOrder on  $projection.SalesOrder = _SalesOrder.SalesOrder
+  association [0..1] to ZE_SalesOrderItem         as _Extension  on  $projection.SalesOrder     = _Extension.SalesOrder
+
+                                                                 and $projection.SalesOrderItem = _Extension.SalesOrderItem
 
 
 {
@@ -37,8 +48,8 @@ define view entity ZI_SalesOrderItem
       transactioncurrency as TransactionCurrency,
       @Semantics.systemDateTime.createdAt: true
       creationdate        as CreationDate,
-      createdbyuser        as CreatedByUser,
-      creationdatetime        as CreationDateTime,
+      createdbyuser       as CreatedByUser,
+      creationdatetime    as CreationDateTime,
       lastchangedatetime  as LastChangeDateTime,
       lastchangedbyuser   as LastChangedByUser,
       _SalesOrder,
