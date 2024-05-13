@@ -6,7 +6,7 @@ define view entity ZI_Priority as select from DDCDS_CUSTOMER_DOMAIN_VALUE( p_dom
   association [0..*] to ZI_Priority_Text as _Text on $projection.Priority = _Text.Priority
 {
       @ObjectModel.text.association: '_Text'
-  key cast( value_low as zzpriority preserving type ) as Priority
+  key cast( value_low as zzpriority ) as Priority
   ,
       _Text
 }

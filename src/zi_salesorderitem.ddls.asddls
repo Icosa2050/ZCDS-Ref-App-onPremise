@@ -54,5 +54,7 @@ define view entity ZI_SalesOrderItem
       lastchangedbyuser   as LastChangedByUser,
       _SalesOrder,
       _Product,
-      _ScheduleLine
+      _ScheduleLine,
+      _Extension
+
 }

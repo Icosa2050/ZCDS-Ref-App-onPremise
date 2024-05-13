@@ -12,7 +12,7 @@ define view entity ZI_Priority_Text as select from dd07t
 {
       @ObjectModel.foreignKey.association: '_Language'
       @Semantics.language: true
-  key cast( dd07t.ddlanguage as spras preserving type ) as Language, 
+  key cast( dd07t.ddlanguage as spras ) as Language, 
       @ObjectModel.foreignKey.association: '_Priority'
       @ObjectModel.text.element: ['PriorityText']
   key cast( dd07t.domvalue_l as zzpriority ) as Priority,

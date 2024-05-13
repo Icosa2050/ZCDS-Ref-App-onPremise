@@ -1,0 +1,945 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "test variant for ABAP Cloud Readiness",
+    "originalLanguage": "en"
+  },
+  "selectedChecks": [
+    {
+      "checkName": "ODATA_CONSIST_EVTB"
+    },
+    {
+      "checkName": "ODATA_CONSISTENCY"
+    },
+    {
+      "checkName": "CI_SQL1_CONSISTENCY"
+    },
+    {
+      "checkName": "DD_CI_DDIC_CONSISTENCY_AC"
+    },
+    {
+      "checkName": "DD_CI_DDIC_CONSISTENCY_PA"
+    },
+    {
+      "checkName": "DD_CI_ABAP_USAGE_SQL_VIEW"
+    },
+    {
+      "checkName": "DD_CI_DDIC_USAGE_SQL_VIEW"
+    },
+    {
+      "checkName": "SADL_PRIVILEGED_ASSOCS"
+    },
+    {
+      "checkName": "SADL_RUNTIME"
+    },
+    {
+      "checkName": "SADL_TEXT_SEARCH"
+    },
+    {
+      "checkName": "SADL_VIRT_ELEM_EXIT"
+    },
+    {
+      "checkName": "KTD_UNASSIGNED_TEXTS"
+    },
+    {
+      "checkName": "KTD_NO_DEAD_LINKS"
+    },
+    {
+      "checkName": "SLIN_VERS",
+      "parameters": [
+        {
+          "name": "ABAPLanguageVersion",
+          "value": "4"
+        }
+      ]
+    },
+    {
+      "checkName": "SYCM_CHECK_ABAP_LANGU_VERSION"
+    },
+    {
+      "checkName": "SYCM_CLOUD_ALLOWED_OBJCT_TYPES"
+    },
+    {
+      "checkName": "CDS_REFERENCED_OBJECTS"
+    },
+    {
+      "checkName": "CDS_ACCESS_CONDITIONS"
+    },
+    {
+      "checkName": "CDS_DDLX_SYNTAX_CHECK"
+    },
+    {
+      "checkName": "ABAP_UNIT",
+      "parameters": [
+        {
+          "name": "MaximumRiskLevel",
+          "value": "11"
+        },
+        {
+          "name": "MaximumRuntimeCategory",
+          "value": "12"
+        },
+        {
+          "name": "RuntimeRestriction",
+          "value": "2"
+        },
+        {
+          "name": "DurationLong",
+          "value": "3600"
+        },
+        {
+          "name": "DurationMedium",
+          "value": "300"
+        },
+        {
+          "name": "DurationShort",
+          "value": "60"
+        }
+      ]
+    },
+    {
+      "checkName": "CI_ANALYZE_WHERE",
+      "parameters": [
+        {
+          "name": "NoWhereCondition",
+          "value": "true"
+        },
+        {
+          "name": "NoIndexInWhereCondition",
+          "value": "true"
+        },
+        {
+          "name": "NoFirstIndexFieldInWhereCondition",
+          "value": "true"
+        },
+        {
+          "name": "ClientSpecifiedWithoutMandt",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "checkName": "CI_ANALYZE_WHERE_IMUD",
+      "parameters": [
+        {
+          "name": "NoWhereCondition",
+          "value": "true"
+        },
+        {
+          "name": "NoIndexInWhereCondition",
+          "value": "true"
+        },
+        {
+          "name": "NoFirstIndexFieldInWhereCondition",
+          "value": "true"
+        },
+        {
+          "name": "ClientSpecifiedWithoutMandt",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "checkName": "CI_ITAB_PERFORMANCE",
+      "parameters": [
+        {
+          "name": "CheckStandardTables",
+          "value": "true"
+        },
+        {
+          "name": "CheckSortedTables",
+          "value": "true"
+        },
+        {
+          "name": "CheckHashedTables",
+          "value": "true"
+        },
+        {
+          "name": "CheckGenericTables",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "checkName": "CI_ANALYZE_SELECT_HANA",
+      "parameters": [
+        {
+          "name": "RestrictToTables"
+        },
+        {
+          "name": "MinimumTableSizeCategory",
+          "value": "0"
+        },
+        {
+          "name": "MinimumNumberOfTableFields",
+          "value": "2"
+        },
+        {
+          "name": "PercentageOfFields",
+          "value": "20"
+        },
+        {
+          "name": "ExcludeBufferedReads",
+          "value": "true"
+        },
+        {
+          "name": "OnlyLocalProcedures",
+          "value": "true"
+        },
+        {
+          "name": "NonLocalAnalysisDepth",
+          "value": "1"
+        },
+        {
+          "name": "DoNotTransformSelects",
+          "value": "false"
+        },
+        {
+          "name": "AssignmentEffort",
+          "value": "20"
+        },
+        {
+          "name": "AssignmentColumnAccess",
+          "value": "10"
+        }
+      ]
+    },
+    {
+      "checkName": "CI_SELECT_TAW_BYBUF"
+    },
+    {
+      "checkName": "CI_VALUE_PARAMETER",
+      "parameters": [
+        {
+          "name": "CheckNestedTables",
+          "value": "true"
+        },
+        {
+          "name": "CheckTables",
+          "value": "true"
+        },
+        {
+          "name": "CheckStrings",
+          "value": "true"
+        },
+        {
+          "name": "CheckLongFields",
+          "value": "true"
+        },
+        {
+          "name": "CheckReturningParameters",
+          "value": "false"
+        },
+        {
+          "name": "CheckEventParameters",
+          "value": "false"
+        },
+        {
+          "name": "CheckUnchangedImportingParameters",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "checkName": "CI_FOR_ALL_ENTRIES_HANA",
+      "parameters": [
+        {
+          "name": "RestrictToTables"
+        },
+        {
+          "name": "MinimumTableSizeCategory",
+          "value": "0"
+        },
+        {
+          "name": "ExcludeBufferedReads",
+          "value": "true"
+        },
+        {
+          "name": "OnlyLocalProcedures",
+          "value": "true"
+        },
+        {
+          "name": "NonLocalAnalysisDepth",
+          "value": "1"
+        },
+        {
+          "name": "AssignmentEffort",
+          "value": "10"
+        },
+        {
+          "name": "CallEffort",
+          "value": "10"
+        }
+      ]
+    },
+    {
+      "checkName": "CI_DDIC_TABLES",
+      "parameters": [
+        {
+          "name": "CheckTechnicalSettings",
+          "value": "true"
+        },
+        {
+          "name": "CheckTableIndices",
+          "value": "true"
+        },
+        {
+          "name": "CheckBufferingOfINDXTables",
+          "value": "false"
+        },
+        {
+          "name": "CheckClientDependencyOfViews",
+          "value": "false"
+        },
+        {
+          "name": "CheckForHANASpecifics",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "checkName": "CI_NAMING_NEW",
+      "parameters": [
+        {
+          "name": "PrefixElem",
+          "value": "[EV]"
+        },
+        {
+          "name": "PrefixGen",
+          "value": "[GV]"
+        },
+        {
+          "name": "PrefixRefBadi",
+          "value": "B"
+        },
+        {
+          "name": "PrefixRefCls",
+          "value": "O"
+        },
+        {
+          "name": "PrefixRefData",
+          "value": "R"
+        },
+        {
+          "name": "PrefixRefIntf",
+          "value": "I"
+        },
+        {
+          "name": "PrefixRefExp",
+          "value": "X"
+        },
+        {
+          "name": "PrefixStruct",
+          "value": "S"
+        },
+        {
+          "name": "PrefixTabAny",
+          "value": "T"
+        },
+        {
+          "name": "PrefixTabHash",
+          "value": "TH?"
+        },
+        {
+          "name": "PrefixTabIndex",
+          "value": "T"
+        },
+        {
+          "name": "PrefixTabStd",
+          "value": "T"
+        },
+        {
+          "name": "PrefixTabSort",
+          "value": "TS?"
+        },
+        {
+          "name": "WebDynp",
+          "value": "false"
+        },
+        {
+          "name": "Report"
+        },
+        {
+          "name": "FunctionGroup"
+        },
+        {
+          "name": "DataGlob",
+          "valueList": [
+            "(/.*/)?G[:type:]_"
+          ]
+        },
+        {
+          "name": "FieldSymbolGlob",
+          "valueList": [
+            "<G[:type:]_"
+          ]
+        },
+        {
+          "name": "ConstantGlob",
+          "valueList": [
+            "(/.*/)?GC[:type:]?_"
+          ]
+        },
+        {
+          "name": "TypeGlob"
+        },
+        {
+          "name": "SelectOption",
+          "valueList": [
+            "S_.."
+          ]
+        },
+        {
+          "name": "Parameter",
+          "valueList": [
+            "P_.."
+          ]
+        },
+        {
+          "name": "SelectionScreen"
+        },
+        {
+          "name": "FieldGroup"
+        },
+        {
+          "name": "Define"
+        },
+        {
+          "name": "DataLoc",
+          "valueList": [
+            "(/.*/)?L[:type:]_"
+          ]
+        },
+        {
+          "name": "Static",
+          "valueList": [
+            "(/.*/)?S[:type:]_"
+          ]
+        },
+        {
+          "name": "FieldSymbolLoc",
+          "valueList": [
+            "<(/.*/)?L[:type:]_"
+          ]
+        },
+        {
+          "name": "ConstantLoc",
+          "valueList": [
+            "(/.*/)?LC[:type:]?_"
+          ]
+        },
+        {
+          "name": "TypeLoc"
+        },
+        {
+          "name": "Function"
+        },
+        {
+          "name": "FunctionImporting",
+          "valueList": [
+            "I[:type:]_"
+          ]
+        },
+        {
+          "name": "FunctionExporting",
+          "valueList": [
+            "E[:type:]_"
+          ]
+        },
+        {
+          "name": "FunctionChanging",
+          "valueList": [
+            "C[:type:]_"
+          ]
+        },
+        {
+          "name": "FunctionTable",
+          "valueList": [
+            "T[:type:]_"
+          ]
+        },
+        {
+          "name": "Form"
+        },
+        {
+          "name": "FormUsing",
+          "valueList": [
+            "P[:type:]_"
+          ]
+        },
+        {
+          "name": "FormChanging",
+          "valueList": [
+            "C[:type:]_"
+          ]
+        },
+        {
+          "name": "FormTable",
+          "valueList": [
+            "T[:type:]_"
+          ]
+        },
+        {
+          "name": "ClassGlob",
+          "valueList": [
+            "(/.*/)?CL_",
+            "(/.*/)?CX_",
+            "ZCL_",
+            "ZCX_"
+          ]
+        },
+        {
+          "name": "ClassLoc",
+          "valueList": [
+            "LCL_",
+            "LCX_"
+          ]
+        },
+        {
+          "name": "InterfaceGlob",
+          "valueList": [
+            "(/.*/)?IF_",
+            "ZIF_"
+          ]
+        },
+        {
+          "name": "InterfaceLoc",
+          "valueList": [
+            "LIF_"
+          ]
+        },
+        {
+          "name": "ClsData",
+          "valueList": [
+            "M[:type:]_"
+          ]
+        },
+        {
+          "name": "ClsClassData",
+          "valueList": [
+            "G[:type:]_"
+          ]
+        },
+        {
+          "name": "ClsConstant",
+          "valueList": [
+            "C[:type:]?_"
+          ]
+        },
+        {
+          "name": "ClsType"
+        },
+        {
+          "name": "IntfData",
+          "valueList": [
+            "M[:type:]_"
+          ]
+        },
+        {
+          "name": "IntfClassData",
+          "valueList": [
+            "G[:type:]_"
+          ]
+        },
+        {
+          "name": "IntfConstant",
+          "valueList": [
+            "C[:type:]?_"
+          ]
+        },
+        {
+          "name": "IntfType"
+        },
+        {
+          "name": "Method"
+        },
+        {
+          "name": "MethodImporting",
+          "valueList": [
+            "I[:type:]_"
+          ]
+        },
+        {
+          "name": "MethodExporting",
+          "valueList": [
+            "E[:type:]_"
+          ]
+        },
+        {
+          "name": "MethodChanging",
+          "valueList": [
+            "C[:type:]_"
+          ]
+        },
+        {
+          "name": "MethodReturning",
+          "valueList": [
+            "R[:type:]_"
+          ]
+        },
+        {
+          "name": "Event"
+        },
+        {
+          "name": "EventExporting",
+          "valueList": [
+            "I[:type:]_"
+          ]
+        }
+      ]
+    },
+    {
+      "checkName": "CI_SEARCH_DB_OPS_IN_PC"
+    },
+    {
+      "checkName": "CI_NO_ORDER_BY",
+      "parameters": [
+        {
+          "name": "AnalyzeOnlyLocalProcedures",
+          "value": "true"
+        },
+        {
+          "name": "ReportPoolClusterTables",
+          "value": "true"
+        },
+        {
+          "name": "NonLocalAnalysisDepth",
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "checkName": "CI_FOR_ALL_ENTRIES"
+    },
+    {
+      "checkName": "SYCM_S4H_AMDP_CLIENT",
+      "parameters": [
+        {
+          "name": "ReleaseID"
+        },
+        {
+          "name": "SAPNotes"
+        }
+      ]
+    },
+    {
+      "checkName": "SYCM_S4H_CDS_PRIV_ACC",
+      "parameters": [
+        {
+          "name": "ReleaseID"
+        },
+        {
+          "name": "SAPNotes"
+        }
+      ]
+    },
+    {
+      "checkName": "SYCM_S4H_FIELD_EXT",
+      "parameters": [
+        {
+          "name": "ReleaseID"
+        },
+        {
+          "name": "SAPNotes"
+        },
+        {
+          "name": "MaterialNumberLength",
+          "value": "0"
+        },
+        {
+          "name": "AmountFLE",
+          "value": "false"
+        },
+        {
+          "name": "SegmentFLE",
+          "value": "false"
+        },
+        {
+          "name": "SeasonFLE",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "checkName": "SYCM_S4H_SAP_QUERY",
+      "parameters": [
+        {
+          "name": "ReleaseID"
+        }
+      ]
+    },
+    {
+      "checkName": "SYCM_S4H_DD_ENHANCEMENTS",
+      "parameters": [
+        {
+          "name": "ReleaseID"
+        },
+        {
+          "name": "SAPNotes"
+        }
+      ]
+    },
+    {
+      "checkName": "SYCM_S4H_DD_VIEW_BASE",
+      "parameters": [
+        {
+          "name": "ReleaseID"
+        },
+        {
+          "name": "SAPNotes"
+        }
+      ]
+    },
+    {
+      "checkName": "SYCM_S4H_SEARCH_DB_OPS",
+      "parameters": [
+        {
+          "name": "ReleaseID",
+          "value": "S4HANA_READINESS_1809"
+        },
+        {
+          "name": "SAPNotes",
+          "valueRangeList": [
+            {
+              "sign": "exclude",
+              "option": "equals",
+              "low": "0002470721",
+              "high": "0000000000"
+            }
+          ]
+        },
+        {
+          "name": "SimplificationItemCategories",
+          "valueRangeList": [
+            {
+              "sign": "exclude",
+              "option": "equals",
+              "low": "P"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "checkName": "SYCM_S4H_TRAN_LITERALS",
+      "parameters": [
+        {
+          "name": "ReleaseID"
+        },
+        {
+          "name": "SAPNotes"
+        },
+        {
+          "name": "SimplificationItemCategories"
+        }
+      ]
+    },
+    {
+      "checkName": "SYCM_S4H_WHERE_USED",
+      "parameters": [
+        {
+          "name": "ReleaseID"
+        },
+        {
+          "name": "SAPNotes"
+        },
+        {
+          "name": "SimplificationItemCategories"
+        }
+      ]
+    },
+    {
+      "checkName": "CI_SEARCH_CUST_MODIFICATIONS",
+      "parameters": [
+        {
+          "name": "OnlyModAss",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "checkName": "BSP_SEC"
+    },
+    {
+      "checkName": "SLIN_SEC"
+    },
+    {
+      "checkName": "CI_CRITICAL_STATEMENTS",
+      "parameters": [
+        {
+          "name": "CCalls",
+          "value": "true"
+        },
+        {
+          "name": "SystemCalls",
+          "value": "true"
+        },
+        {
+          "name": "EditorCalls",
+          "value": "true"
+        },
+        {
+          "name": "Submits",
+          "value": "true"
+        },
+        {
+          "name": "CallTransaction",
+          "value": "true"
+        },
+        {
+          "name": "Rollbacks",
+          "value": "true"
+        },
+        {
+          "name": "ExecSQL",
+          "value": "true"
+        },
+        {
+          "name": "Hints",
+          "value": "true"
+        },
+        {
+          "name": "Generate",
+          "value": "true"
+        },
+        {
+          "name": "ReadReport",
+          "value": "false"
+        },
+        {
+          "name": "InsertReport",
+          "value": "true"
+        },
+        {
+          "name": "ImportDynpro",
+          "value": "false"
+        },
+        {
+          "name": "ExportDynpro",
+          "value": "true"
+        },
+        {
+          "name": "ImportNametab",
+          "value": "false"
+        },
+        {
+          "name": "ExportNametab",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "checkName": "CI_FIND_DYN_SQL",
+      "parameters": [
+        {
+          "name": "UsageOfADBCClasses",
+          "value": "true"
+        },
+        {
+          "name": "UsageOfClasses"
+        },
+        {
+          "name": "FindingGranularity",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "checkName": "CI_AMDP_HDB_MIGRATION"
+    },
+    {
+      "checkName": "SLIN_MAIN",
+      "parameters": [
+        {
+          "name": "StandardOrCustom",
+          "value": "1"
+        },
+        {
+          "name": "SubroutineInterfaces",
+          "value": "true"
+        },
+        {
+          "name": "FunctionInterfaces",
+          "value": "true"
+        },
+        {
+          "name": "ExternalProgramInterfaces",
+          "value": "true"
+        },
+        {
+          "name": "LoadSizes",
+          "value": "true"
+        },
+        {
+          "name": "Authorizations",
+          "value": "true"
+        },
+        {
+          "name": "GuiStatus",
+          "value": "true"
+        },
+        {
+          "name": "SetGetParameters",
+          "value": "true"
+        },
+        {
+          "name": "MessageStatements",
+          "value": "true"
+        },
+        {
+          "name": "Strings",
+          "value": "true"
+        },
+        {
+          "name": "CurrencyFields",
+          "value": "true"
+        },
+        {
+          "name": "FieldAttributes",
+          "value": "true"
+        },
+        {
+          "name": "SyntaxCheckWarnings",
+          "value": "true"
+        },
+        {
+          "name": "Internationalization",
+          "value": "true"
+        },
+        {
+          "name": "SuperfluousStatements",
+          "value": "true"
+        },
+        {
+          "name": "ProblematicStatements",
+          "value": "true"
+        },
+        {
+          "name": "StructureEnhancements",
+          "value": "true"
+        },
+        {
+          "name": "OutdatedStatements",
+          "value": "false"
+        },
+        {
+          "name": "CrossProgramChecks",
+          "value": "false"
+        },
+        {
+          "name": "ProgrammingGuidelines",
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "checkName": "API_COMPATIBILITY"
+    },
+    {
+      "checkName": "API_CONSISTENCY"
+    },
+    {
+      "checkName": "API_CATALOG_USAGE"
+    }
+  ]
+}
