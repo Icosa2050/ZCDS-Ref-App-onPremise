@@ -1,0 +1,14 @@
+extension implementation in class zbp_c_salesordertp_extension unique;
+
+extend behavior for SalesOrder
+{
+}
+
+extend behavior for SalesOrderItem
+{
+  field ( features : instance ) ZZPriority2ZSI;
+  extend mapping for zsalesorderitem
+  {
+    ZZPriority2ZSI = ZZPriority2ZSI;
+  }
+}

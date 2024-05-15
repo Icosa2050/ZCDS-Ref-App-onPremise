@@ -1,7 +1,7 @@
 managed implementation in class zbp_r_salesordertp unique;
 strict ( 2 );
 with draft;
-//extensible { with additional save; with determinations on modify; with determinations on save; with validations on save; }
+extensible { with additional save; with determinations on modify; with determinations on save; with validations on save; }
 
 // Allow consumers to use PRIVILEGED mode
 //cl_abap_behv_aux=>get_current_context(    IMPORTING privileged = data(privileged)  ).
@@ -23,6 +23,7 @@ with additional save
 lock master unmanaged total etag LastChangeDateTime
 etag master LastChangeDateTime
 authorization master ( global, instance )
+extensible
 //changedocuments master ( zsalesorder )
 
 {
@@ -39,14 +40,14 @@ authorization master ( global, instance )
   field ( mandatory ) SalesOrderType;
   field ( mandatory ) SalesOrganization;
   field ( mandatory ) SoldToParty;
-
+  mapping for zsalesorder corresponding extensible;
   action ( features : instance ) Delete;
-//  draft action Activate optimized;
-  draft action Activate ;
+  //  draft action Activate optimized;
+  draft action Activate;
   draft action ( features : instance ) Edit;
   draft action Resume;
   draft action Discard;
-  draft determine action Prepare;
+  draft determine action Prepare extensible;
 
   static factory action ( features : global ) CreateFromQuote deep parameter ZD_SalesOrderCreateFromQuoteP [1];
 
@@ -64,43 +65,43 @@ authorization master ( global, instance )
     validation ( always ) SalesOrderScheduleLine~VerifyQuantityUnit;
   }
   /*
-  side effects
-  {
-    action Delete
-    affects $self,
-        entity _Item,
-        entity _item._ScheduleLine,
-        permissions ( action Delete ),
-        messages;
-    // determine actin Prepare executed on global
-    // error "execute on global" is not supported in this ABAP release.
-    // workaround: use action Prepare in on fields
-    determine action Prepare executed on
-    field SoldToParty,
-    field NetAmount,
-    field TransactionCurrency,
-    field _Item.OrderQuantity,
-    field _Item.OrderQuantityUnit,
-    field _Item.Product,
-    field _Item.NetAmount,
-    field _Item.TransactionCurrency,
-    field _Item._ScheduleLine.OrderQuantity,
-    field _Item._ScheduleLine.OrderQuantityUnit
-    affects
-        field SoldToParty,
-        field NetAmount,
-        field TransactionCurrency,
-        field _Item.OrderQuantity,
-        field _Item.OrderQuantityUnit,
-        field _Item.Product,
-        field _Item.NetAmount,
-        field _Item.TransactionCurrency,
-        field _Item._ScheduleLine.OrderQuantity,
-        field _Item._ScheduleLine.OrderQuantityUnit,
-        messages;
+   side effects
+   {
+   action Delete
+   affects $self,
+   entity _Item,
+   entity _item._ScheduleLine,
+   permissions ( action Delete ),
+   messages;
+   // determine actin Prepare executed on global
+   // error "execute on global" is not supported in this ABAP release.
+   // workaround: use action Prepare in on fields
+   determine action Prepare executed on
+   field SoldToParty,
+   field NetAmount,
+   field TransactionCurrency,
+   field _Item.OrderQuantity,
+   field _Item.OrderQuantityUnit,
+   field _Item.Product,
+   field _Item.NetAmount,
+   field _Item.TransactionCurrency,
+   field _Item._ScheduleLine.OrderQuantity,
+   field _Item._ScheduleLine.OrderQuantityUnit
+   affects
+   field SoldToParty,
+   field NetAmount,
+   field TransactionCurrency,
+   field _Item.OrderQuantity,
+   field _Item.OrderQuantityUnit,
+   field _Item.Product,
+   field _Item.NetAmount,
+   field _Item.TransactionCurrency,
+   field _Item._ScheduleLine.OrderQuantity,
+   field _Item._ScheduleLine.OrderQuantityUnit,
+   messages;
 
-  }
-  */
+   }
+   */
   event Created parameter ZD_SalesOrderCreated;
   event Changed;
   event Deleted;
@@ -115,6 +116,7 @@ persistent table zsalesorderitem
 draft table zsalesorderitemd
 lock dependent by _SalesOrder
 authorization dependent by _SalesOrder
+extensible
 //etag master LastChangeDateTime
 {
 
@@ -125,7 +127,7 @@ authorization dependent by _SalesOrder
   field ( readonly : update ) SalesOrderItem;
   field ( readonly ) LastChangedByUser;
   field ( readonly ) LastChangeDateTime;
-
+  mapping for zsalesorderitem corresponding extensible;
 
   association _SalesOrder { with draft; }
   association _ScheduleLine { create ( features : instance ); with draft; }
@@ -133,12 +135,12 @@ authorization dependent by _SalesOrder
   //unmanaged association _RequestedScheduleLine
   //unmanaged association _RequestedScheduleLine
   /*
-  association _RequestedScheduleLine
-  { create ( authorization : update, features : instance ); }
-  //unmanaged association _ConfirmedScheduleLine
-  association _ConfirmedScheduleLine
-  { create ( authorization : update, features : instance ); }
-  */
+   association _RequestedScheduleLine
+   { create ( authorization : update, features : instance ); }
+   //unmanaged association _ConfirmedScheduleLine
+   association _ConfirmedScheduleLine
+   { create ( authorization : update, features : instance ); }
+   */
 
   action ( authorization : update, features : instance ) Copy
     parameter ZD_SALESORDERITEMCOPYPARAMETER
@@ -152,19 +154,19 @@ authorization dependent by _SalesOrder
   //determination CalculateNetAmount on modify { field NetAmount, TransactionCurrency; }
   validation VerifyProduct on save { field Product; }
   /*
-  side effects
-  {
-    action Copy
-    affects $self,
-        entity _ScheduleLine;
-    field NetAmount
-    affects
-        //field _SalesOrder.NetAmount,
-        field NetAmount;
-        //field _SalesOrder.TransactionCurrency;
-        field TransactionCurrency;
-  }
-  */
+   side effects
+   {
+   action Copy
+   affects $self,
+   entity _ScheduleLine;
+   field NetAmount
+   affects
+   //field _SalesOrder.NetAmount,
+   field NetAmount;
+   //field _SalesOrder.TransactionCurrency;
+   field TransactionCurrency;
+   }
+   */
 }
 
 define behavior for ZR_SalesOrderScheduleLineTP alias SalesOrderScheduleLine
@@ -173,6 +175,7 @@ persistent table zsalesordersline
 draft table zsalesorderslind
 lock dependent by _SalesOrder
 authorization dependent by _SalesOrder
+extensible
 //etag master LastChangeDateTime
 //changedocuments master ( zsalesorder )
 {
@@ -181,6 +184,7 @@ authorization dependent by _SalesOrder
   field ( readonly ) SalesOrder;
   field ( readonly : update ) SalesOrderItem;
   field ( readonly : update ) SalesOrderScheduleLine;
+  mapping for zsalesordersline corresponding extensible;
   association _SalesOrder { with draft; }
   association _SalesOrderItem { with draft; }
   validation VerifyQuantityUnit on save { field OrderQuantityUnit; }
