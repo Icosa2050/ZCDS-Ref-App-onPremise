@@ -1,0 +1,12 @@
+@Metadata.layer: #CUSTOMER
+annotate view ZC_SalesOrderItemTP with
+{
+  @UI.lineItem: [{position: 80, importance: #HIGH},
+                 { type: #FOR_ACTION, invocationGrouping: #CHANGE_SET, dataAction: 'SetAdditionalPriority', label: 'Set Additional Priority' }]
+  @UI.fieldGroup: [{qualifier: 'GeneralData', position: 80, importance: #HIGH },
+                 { type: #FOR_ACTION, invocationGrouping: #CHANGE_SET, dataAction: 'SetAdditionalPriority', label: 'Set Additional Priority' }]
+  ZZPriorityZSI;
+  @UI.lineItem: [{position: 90, importance: #HIGH}]
+  @UI.fieldGroup: [{qualifier: 'GeneralData', position: 90, importance: #HIGH }]
+  ZZPriority2ZSI;
+}

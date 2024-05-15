@@ -1,11 +1,11 @@
-CLASS z2ui5_cl_cds_tree_007 DEFINITION
+CLASS zcl_ui5_cl_cds_tree_007 DEFINITION
   PUBLIC
   FINAL
   CREATE PUBLIC .
 
   PUBLIC SECTION.
 
-    INTERFACES Z2UI5_if_app.
+    INTERFACES z2ui5_if_app.
 
     TYPES: BEGIN OF ts_tree_row_base,
              employee              TYPE numc4,
@@ -49,15 +49,20 @@ ENDCLASS.
 
 
 
-CLASS z2ui5_cl_cds_tree_007 IMPLEMENTATION.
+CLASS zcl_ui5_cl_cds_tree_007 IMPLEMENTATION.
 
 
-  METHOD Z2UI5_if_app~main.
+  METHOD z2ui5_if_app~main.
+    DATA ls_tree1 TYPE ts_tree_level1.
+    DATA ls_tree2 TYPE ts_tree_level2.
+    DATA ls_tree3 TYPE ts_tree_level3.
+    DATA: lv_tree_text TYPE lvc_value.
+
 
     IF check_initialized = abap_false.
       check_initialized = abap_true.
       SELECT
-     FROM ZHI_HierarchicalEmployee03
+     FROM zhi_hierarchicalemployee03
      FIELDS
        employee,
        \_employee-employeename AS node_text,
@@ -72,17 +77,13 @@ CLASS z2ui5_cl_cds_tree_007 IMPLEMENTATION.
      ORDER BY hierarchy_rank
      INTO TABLE @DATA(gt_hierarchy_display).
 
-      DATA ls_tree1 TYPE ts_tree_level1.
-      DATA ls_tree2 TYPE ts_tree_level2.
-      DATA ls_tree3 TYPE ts_tree_level3.
-      DATA: lv_tree_text TYPE lvc_value.
-
       LOOP AT gt_hierarchy_display ASSIGNING FIELD-SYMBOL(<ls_node_data>).
         IF <ls_node_data>-hierarchy_level = 1.
-          MOVE-CORRESPONDING <ls_node_data> TO ls_tree1.
+        ls_tree1 = CORRESPONDING #( <ls_node_data> ).
+          "MOVE-CORRESPONDING <ls_node_data> TO ls_tree1.
           APPEND ls_tree1 TO mt_tree.
         ELSE.
-          READ TABLE gt_hierarchy_display WITH KEY parent_ID = <ls_node_data>-parent_id
+          READ TABLE gt_hierarchy_display WITH KEY parent_id = <ls_node_data>-parent_id
                                       ASSIGNING FIELD-SYMBOL(<ls_parent_data>).
           lv_tree_text = <ls_node_data>-node_text.
 
@@ -90,11 +91,13 @@ CLASS z2ui5_cl_cds_tree_007 IMPLEMENTATION.
             READ TABLE mt_tree WITH KEY node_id = <ls_node_data>-parent_id
                                         ASSIGNING FIELD-SYMBOL(<ls_parent>).
             IF sy-subrc = 0.
-              MOVE-CORRESPONDING <ls_node_data> TO ls_tree2.
+            ls_tree2 = CORRESPONDING #( <ls_node_data> ).
+              "MOVE-CORRESPONDING <ls_node_data> TO ls_tree2.
               APPEND  ls_tree2 TO <ls_parent>-employees.
             ELSE.
               APPEND INITIAL LINE TO mt_tree ASSIGNING FIELD-SYMBOL(<new_node>).
-              MOVE-CORRESPONDING <ls_node_data> TO <new_node>.
+              <new_node> = CORRESPONDING #( <ls_parent_data> ).
+              "MOVE-CORRESPONDING <ls_node_data> TO <new_node>.
 
             ENDIF.
           ENDIF.

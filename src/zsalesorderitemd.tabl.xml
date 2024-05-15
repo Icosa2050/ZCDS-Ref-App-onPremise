@@ -133,6 +133,14 @@
      <DDTEXT>salesorderitem include</DDTEXT>
      <COMPTYPE>S</COMPTYPE>
     </DD03P>
+    <DD03P>
+     <FIELDNAME>.INCLU--AP</FIELDNAME>
+     <ADMINFIELD>0</ADMINFIELD>
+     <PRECFIELD>ZSALESORDERITEMD_EXTENSION</PRECFIELD>
+     <MASK>      S</MASK>
+     <DDTEXT>Sales Order Item Extension</DDTEXT>
+     <COMPTYPE>S</COMPTYPE>
+    </DD03P>
    </DD03P_TABLE>
    <TABL_EXTRAS>
     <TDDAT>

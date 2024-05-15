@@ -1,12 +1,25 @@
-@AbapCatalog.viewEnhancementCategory: [#NONE]
+@Metadata.ignorePropagatedAnnotations: true
 @AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Sales Order Item'
-@Metadata.ignorePropagatedAnnotations: true
+@Metadata.allowExtensions: true
+@AbapCatalog.extensibility: {
+extensible:true,
+elementSuffix:'ZSI',
+allowNewDatasources:false,
+dataSources: ['_Extension'],
+quota: {
+maximumFields:1000,
+maximumBytes:10000
+}
+
+}
 @ObjectModel.usageType:{
     serviceQuality: #X,
     sizeCategory: #S,
     dataClass: #MIXED
 }
+
+
 define view entity ZR_SalesOrderItemTP
   as select from ZR_SalesOrderItem_IC as ZR_SalesOrderItem
   association        to parent ZR_SalesOrderTP      as _SalesOrder            on  $projection.SalesOrder = _SalesOrder.SalesOrder
@@ -17,10 +30,15 @@ define view entity ZR_SalesOrderItemTP
   association [0..*] to ZR_SalesOrderScheduleLineTP as _ConfirmedScheduleLine on  $projection.SalesOrder     = _ConfirmedScheduleLine.SalesOrder
                                                                               and $projection.SalesOrderItem = _ConfirmedScheduleLine.SalesOrderItem
                                                                               and 'C'                        = _ConfirmedScheduleLine.SalesOrderScheduleLineType
-                                                                              
+
   association [0..1] to ZI_Product                  as _Product               on  $projection.Product = _Product.Product
-  association [1..1]    to ZI_USER                      as _CreatedByUser         on  $projection.CreatedByUser = _CreatedByUser.Userid
-  association [1..1]    to ZI_USER                      as _LastChangedByUser     on  $projection.LastChangedByUser = _LastChangedByUser.Userid
+  association [1..1] to ZI_USER                     as _CreatedByUser         on  $projection.CreatedByUser = _CreatedByUser.Userid
+  association [1..1] to ZI_USER                     as _LastChangedByUser     on  $projection.LastChangedByUser = _LastChangedByUser.Userid
+  association [0..1] to ZE_SalesOrderItem           as _Extension             on  $projection.SalesOrder     = _Extension.SalesOrder
+
+                                                                              and $projection.SalesOrderItem = _Extension.SalesOrderItem
+
+
 {
       @ObjectModel.foreignKey.association: '_SalesOrder'
   key ZR_SalesOrderItem.SalesOrder,
@@ -48,7 +66,8 @@ define view entity ZR_SalesOrderItemTP
       _RequestedScheduleLine,
       _ConfirmedScheduleLine,
       _CreatedByUser,
-      _LastChangedByUser
+      _LastChangedByUser,
+      _Extension
 }
 /*
 define view entity ZR_SalesOrderItemTP

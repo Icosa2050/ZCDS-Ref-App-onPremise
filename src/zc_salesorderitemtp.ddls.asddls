@@ -57,5 +57,7 @@ define view entity ZC_SalesOrderItemTP
           _SalesOrder : redirected to parent ZC_SalesOrderTP
           ,
           _ScheduleLine : redirected to composition child ZC_SalesOrderScheduleLineTP,
-          _Product
+          _Product,
+          _Extension
+
 }

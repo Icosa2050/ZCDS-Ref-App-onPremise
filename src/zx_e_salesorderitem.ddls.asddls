@@ -4,6 +4,7 @@ on $projection.ZZPriorityZSI = _ZZPriorityZSI.Priority
 {
   @ObjectModel.foreignKey.association: '_ZZPriorityZSI'
   Persistence.zzpriorityzsi as ZZPriorityZSI,
+  Persistence.zzpriority2zsi as ZZPriority2ZSI,
   _ZZPriorityZSI
 
 }

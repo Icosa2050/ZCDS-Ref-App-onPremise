@@ -1,10 +1,10 @@
-class ZBP_R_SALESORDERTP definition
-  public
-  for behavior of ZR_SALESORDERTP .
+CLASS ZBP_R_SALESORDERTP DEFINITION
+  PUBLIC
+  FOR BEHAVIOR OF ZR_SALESORDERTP .
 
-public section.
-protected section.
-private section.
+  PUBLIC SECTION.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
 ENDCLASS.
 
 

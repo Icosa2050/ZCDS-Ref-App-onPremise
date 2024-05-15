@@ -3,9 +3,9 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOCLASS>
-    <CLSNAME>Z2UI5_CL_CDS_TREE_007</CLSNAME>
+    <CLSNAME>ZCL_UI5_CL_CDS_TREE_007</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>tree - simple</DESCRIPT>
+    <DESCRIPT>simple tree in ABAP UI5</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>

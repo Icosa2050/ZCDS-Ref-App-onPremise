@@ -22,7 +22,9 @@ CLASS zcl_select_salesord_with_mandt IMPLEMENTATION.
        .
     "WHERE client = '001'.
 
-    out->write( lt_salesorder ).
+    IF ( sy-subrc = 0 ).
+      out->write( lt_salesorder ).
+    ENDIF.
 
   ENDMETHOD.
 ENDCLASS.

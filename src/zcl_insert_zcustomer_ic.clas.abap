@@ -15,7 +15,7 @@ CLASS zcl_insert_zcustomer_ic IMPLEMENTATION.
   METHOD if_oo_adt_classrun~main.
     DATA: lt_product_ic TYPE TABLE OF zcustomer_ic.
     DATA: ls_product_ic TYPE zcustomer_ic.
-    SELECT * FROM zcustomer_ic INTO TABLE @lt_product_ic.
+    SELECT * FROM zcustomer_ic INTO TABLE @lt_product_ic order by primary key.
     DELETE zcustomer_ic FROM TABLE @lt_product_ic.
     commit work.
     GET TIME STAMP FIELD DATA(lv_time).
